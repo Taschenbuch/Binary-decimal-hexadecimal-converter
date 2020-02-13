@@ -1,4 +1,6 @@
 # Binary-decimal-hexadecimal-converter
+
+[Download .exe here](https://github.com/Taschenbuch/Binary-decimal-hexadecimal-converter/releases)
  
 #### Convert between multiple binary, decimal and hexadecimal values. Add a comment to them, to remember what the value was for.
 
