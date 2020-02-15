@@ -1,4 +1,4 @@
-using System.Numerics;
+using System;
 using BinHexDecConverter.Bin2Hex2DecConverters;
 using FluentAssertions;
 using NUnit.Framework;
@@ -28,6 +28,22 @@ namespace BinHexDecConverter.UnitTest
         }
 
 
+        [TestCase("aa", "a")]
+        [TestCase("a", "a")]
+        [TestCase("9a", "a")]
+        [TestCase("a9", "a")]
+        [TestCase("9a9", "a")]
+        [TestCase("a?+", "a?+")]
+        public void Throw_if_not_decimal_input_for_binary(string decimalString, string expectedNotAllowedCharacters)
+        {
+            Action act = () => DecimalToBinaryService.DecimalToBinary(decimalString);
+
+            act.Should()
+               .Throw<ArgumentOutOfRangeException>()
+               .WithMessage($"Only 0-9 and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}");
+        }
+
+
         [TestCase("", "")]
         [TestCase(null, "")]
         [TestCase(" 0 ", "0")]
@@ -49,6 +65,20 @@ namespace BinHexDecConverter.UnitTest
             result.Should().Be(expectedDecimalString);
         }
 
+        [TestCase("aa", "a")]
+        [TestCase("a", "a")]
+        [TestCase("0a", "a")]
+        [TestCase("a0", "a")]
+        [TestCase("0a0", "a")]
+        [TestCase("a=!", "a=!")]
+        public void Throw_if_not_binary_input(string binaryString, string expectedNotAllowedCharacters)
+        {
+            Action act = () => BinaryToDecimalService.BinaryToDecimal(binaryString);
+
+            act.Should()
+               .Throw<ArgumentOutOfRangeException>()
+               .WithMessage($"Only 1, 0 and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}");
+        }
 
 
         [TestCase("", "")]
@@ -57,7 +87,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("0", "0")]
         [TestCase("15", "F")]
         [TestCase("255", "FF")]
-        [TestCase("4 095", "F FF")] 
+        [TestCase("4 095", "F FF")]
         [TestCase("65 535", "FF FF")]
         [TestCase("1 048 575", "F FF FF")]
         [TestCase("1048575", "F FF FF")]
@@ -66,6 +96,21 @@ namespace BinHexDecConverter.UnitTest
             var result = DecimalToHexadecimalService.DecimalToHexadecimal(decimalString);
 
             result.Should().Be(expectedHexadecimalString);
+        }
+
+        [TestCase("a", "a")]
+        [TestCase("aa", "a")]
+        [TestCase("9a", "a")]
+        [TestCase("a9", "a")]
+        [TestCase("9a9", "a")]
+        [TestCase("a?+", "a?+")]
+        public void Throw_if_not_decimal_input_for_hexadecimal(string decimalString, string expectedNotAllowedCharacters)
+        {
+            Action act = () => DecimalToHexadecimalService.DecimalToHexadecimal(decimalString);
+
+            act.Should()
+               .Throw<ArgumentOutOfRangeException>()
+               .WithMessage($"Only 0-9 and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}");
         }
 
 
@@ -86,5 +131,21 @@ namespace BinHexDecConverter.UnitTest
             result.Should().Be(expectedDecimalString);
         }
 
+
+        [TestCase("z", "z")]
+        [TestCase("zz", "z")]
+        [TestCase("Z", "Z")]
+        [TestCase("aZ", "Z")]
+        [TestCase("Za", "Z")]
+        [TestCase("aZa", "Z")]
+        [TestCase("zu?=", "zu?=")]
+        public void Throw_if_not_hexadecimal(string hexadecimalString, string expectedNotAllowedCharacters)
+        {
+            Action act = () => HexadecimalToDecimalService.HexadecimalToDecimal(hexadecimalString);
+
+            act.Should()
+               .Throw<ArgumentOutOfRangeException>()
+               .WithMessage($"Only 0-9, A-F and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}");
+        }
     }
 }
