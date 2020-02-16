@@ -17,7 +17,7 @@ namespace BinHexDecConverter
         public string Dec
         {
             get => _dec;
-            set => TryConvertToAndSetBinaryAndHexadecimal(value);
+            set => TrySetAndConvertToBinaryAndHexadecimal(value);
         }
 
 
@@ -25,7 +25,7 @@ namespace BinHexDecConverter
         public string Binary
         {
             get => _binary;
-            set => TryConvertToAndSetDecimalAndHexadecimal(value);
+            set => TrySetAndConvertToDecimalAndHexadecimal(value);
         }
 
 
@@ -33,7 +33,7 @@ namespace BinHexDecConverter
         public string Hexadecimal
         {
             get => _hexadecimal;
-            set => TryConvertToAndSetDecimalAndBinary(value);
+            set => TrySetAndConvertToDecimalAndBinary(value);
         }
 
 
@@ -44,6 +44,12 @@ namespace BinHexDecConverter
             _hexadecimal = SeparatorService.RemoveAndAddSeparatorBlanks(_hexadecimal, 2);
             _hexadecimal = _hexadecimal.ToUpper();
 
+            NotifyBinHexDec();
+        }
+
+        private void NotifyBinHexDec()
+        {
+            // necessary because when exception was thrown, fody.notifypropertyChange didnt work anymore
             OnPropertyChanged(nameof(Binary));
             OnPropertyChanged(nameof(Hexadecimal));
             OnPropertyChanged(nameof(Dec));
@@ -52,7 +58,7 @@ namespace BinHexDecConverter
 
         #region Private methods
 
-        private void TryConvertToAndSetDecimalAndHexadecimal(string value)
+        private void TrySetAndConvertToDecimalAndHexadecimal(string value)
         {
             try
             {
@@ -64,12 +70,13 @@ namespace BinHexDecConverter
             {
                 _dec         = string.Empty;
                 _hexadecimal = string.Empty;
+                NotifyBinHexDec();
                 throw;
             }
         }
 
 
-        private void TryConvertToAndSetBinaryAndHexadecimal(string value)
+        private void TrySetAndConvertToBinaryAndHexadecimal(string value)
         {
             try
             {
@@ -81,12 +88,13 @@ namespace BinHexDecConverter
             {
                 _binary      = string.Empty;
                 _hexadecimal = string.Empty;
+                NotifyBinHexDec();
                 throw;
             }
         }
 
 
-        private void TryConvertToAndSetDecimalAndBinary(string value)
+        private void TrySetAndConvertToDecimalAndBinary(string value)
         {
             try
             {
@@ -98,6 +106,7 @@ namespace BinHexDecConverter
             {
                 _dec    = string.Empty;
                 _binary = string.Empty;
+                NotifyBinHexDec();
                 throw;
             }
         }
