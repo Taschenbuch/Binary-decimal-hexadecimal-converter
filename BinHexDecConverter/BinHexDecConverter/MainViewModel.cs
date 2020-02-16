@@ -8,9 +8,17 @@ namespace BinHexDecConverter
     {
         public MainViewModel()
         {
-            DeleteRowCommand   = new RelayCommand(DeleteRow);
-            AddEmptyRowCommand = new RelayCommand(AddEmptyRow);
+            DeleteRowCommand          = new RelayCommand(DeleteRow);
+            AddEmptyRowCommand        = new RelayCommand(AddEmptyRow);
+            UpdateNumberFormatCommand = new RelayCommand(UpdateNumberFormat);
         }
+
+        private void UpdateNumberFormat()
+        {
+            foreach (var decBinHexValue in DecBinHexValues)
+                decBinHexValue.UpdateNumberFormat();
+        }
+
 
         private void AddEmptyRow()
         {
@@ -24,10 +32,14 @@ namespace BinHexDecConverter
         }
 
 
-        public ICommand                                 DeleteRowCommand   { get; set; }
-        public ICommand                                 AddEmptyRowCommand { get; set; }
-        public event PropertyChangedEventHandler        PropertyChanged;
-        public ObservableCollection<DecBinHexRowViewModel> DecBinHexValues        { get; set; } = new ObservableCollection<DecBinHexRowViewModel>(){new DecBinHexRowViewModel()};
-        public DecBinHexRowViewModel                       SelectedDecBinHexRowValue { get; set; }
+        public ICommand UpdateNumberFormatCommand { get; set; }
+        public ICommand DeleteRowCommand          { get; set; }
+        public ICommand AddEmptyRowCommand        { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<DecBinHexRowViewModel> DecBinHexValues { get; set; } = new ObservableCollection<DecBinHexRowViewModel>() {new DecBinHexRowViewModel()};
+
+        public DecBinHexRowViewModel SelectedDecBinHexRowValue { get; set; }
     }
 }

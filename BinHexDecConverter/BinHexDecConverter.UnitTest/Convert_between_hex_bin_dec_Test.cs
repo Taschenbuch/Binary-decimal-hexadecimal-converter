@@ -40,7 +40,7 @@ namespace BinHexDecConverter.UnitTest
 
             act.Should()
                .Throw<ArgumentOutOfRangeException>()
-               .WithMessage($"Only 0-9 and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}");
+               .WithMessage($"Only 0-9 and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}  ");
         }
 
 
@@ -77,7 +77,7 @@ namespace BinHexDecConverter.UnitTest
 
             act.Should()
                .Throw<ArgumentOutOfRangeException>()
-               .WithMessage($"Only 1, 0 and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}");
+               .WithMessage($"Only 1, 0 and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}  ");
         }
 
 
@@ -110,7 +110,7 @@ namespace BinHexDecConverter.UnitTest
 
             act.Should()
                .Throw<ArgumentOutOfRangeException>()
-               .WithMessage($"Only 0-9 and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}");
+               .WithMessage($"Only 0-9 and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}  ");
         }
 
 
@@ -145,7 +145,7 @@ namespace BinHexDecConverter.UnitTest
 
             act.Should()
                .Throw<ArgumentOutOfRangeException>()
-               .WithMessage($"Only 0-9, A-F and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}");
+               .WithMessage($"Only 0-9, A-F and whitespace allowed. Contains not allowed characters: {expectedNotAllowedCharacters}  ");
         }
     }
 }

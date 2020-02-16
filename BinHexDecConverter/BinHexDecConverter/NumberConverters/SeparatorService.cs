@@ -7,10 +7,18 @@
         public const int HEXADECIMAL_PAIR_SIZE = 2;
         public const int NIBBLE_SIZE = 4;
 
-
-        public static string RemoveSeparatorBlanks(string decimalString)
+        public static string RemoveAndAddSeparatorBlanks(string text, int distanceBetweenSeparators)
         {
-            return decimalString.Replace(BLANK_AS_SEPARATOR, string.Empty);
+            if (text.IsNullOrWhiteSpace())
+                return string.Empty;
+
+            text = RemoveSeparatorBlanks(text);
+            return AddSeparatorBlanks(text, distanceBetweenSeparators);
+        }
+
+        public static string RemoveSeparatorBlanks(string text)
+        {
+            return text.Replace(BLANK_AS_SEPARATOR, string.Empty);
         }
 
 
@@ -21,7 +29,7 @@
 
             var positionOfLastSeparator = text.Length - distanceBetweenSeparators;
 
-            for (int separatorPosition = positionOfLastSeparator; separatorPosition > 0; separatorPosition -= distanceBetweenSeparators)
+            for (var separatorPosition = positionOfLastSeparator; separatorPosition > 0; separatorPosition -= distanceBetweenSeparators)
                 text = text.Insert(separatorPosition, " ");
 
             return text;
