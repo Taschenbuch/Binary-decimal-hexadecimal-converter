@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace BinHexDecConverter.NumberConverters
+﻿namespace BinHexDecConverter.NumberConverters
 {
     public class HexadecimalToDecimalService
     {
@@ -9,7 +7,7 @@ namespace BinHexDecConverter.NumberConverters
             if (hexadecimalString.IsNullOrWhiteSpace())
                 return string.Empty;
 
-            InvalidCharactersExceptionService.ThrowIfRegexMatches(hexadecimalString, new Regex(@"[^0-9A-F\s]", RegexOptions.IgnoreCase), "Only 0-9, A-F and whitespace allowed. Contains not allowed characters:");
+            InvalidCharactersExceptionService.ThrowIfRegexMatches(hexadecimalString, InvalidCharacterRegexFor.Hexadecimal, "Only 0-9, A-F and whitespace allowed. Contains not allowed characters:");
 
             hexadecimalString = SeparatorService.RemoveSeparatorBlanks(hexadecimalString);
             var decimalString = ConvertBaseToBaseService.ConvertFromBaseToBase(hexadecimalString, NumberBase.Hexadecimal, NumberBase.Decimal);

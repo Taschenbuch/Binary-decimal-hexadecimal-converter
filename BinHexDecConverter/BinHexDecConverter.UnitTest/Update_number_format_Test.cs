@@ -16,6 +16,5 @@ namespace BinHexDecConverter.UnitTest
             var result = SeparatorService.RemoveAndAddSeparatorBlanks(oldFormattedNumber, 4);
             result.Should().Be(expectedNumberFormat);
         }
-
     }
 }

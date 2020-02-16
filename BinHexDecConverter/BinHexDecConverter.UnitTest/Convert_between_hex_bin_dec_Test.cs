@@ -91,6 +91,11 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("65 535", "FF FF")]
         [TestCase("1 048 575", "F FF FF")]
         [TestCase("1048575", "F FF FF")]
+        [TestCase("-1", "FF FF FF FF FF FF FF FF")]
+        [TestCase("-256", "FF FF FF FF FF FF FF 00")]
+        [TestCase("-65536", "FF FF FF FF FF FF 00 00")]
+        [TestCase("-111111111181111", "FF FF 9A F1 ED AF FC C9")]
+
         public void Converter_decimal_to_hexadecimal(string decimalString, string expectedHexadecimalString)
         {
             var result = DecimalToHexadecimalService.DecimalToHexadecimal(decimalString);
@@ -104,6 +109,8 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("a9", "a")]
         [TestCase("9a9", "a")]
         [TestCase("a?+", "a?+")]
+        [TestCase("  - 1 a 0 0 b", "ab")]
+        [TestCase("  - 1 a 0 0 -", "a-")]
         public void Throw_if_not_decimal_input_for_hexadecimal(string decimalString, string expectedNotAllowedCharacters)
         {
             Action act = () => DecimalToHexadecimalService.DecimalToHexadecimal(decimalString);
