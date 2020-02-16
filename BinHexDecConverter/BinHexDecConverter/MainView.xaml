@@ -16,6 +16,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"  Height="Auto" Width="Auto"
+        ResizeMode="NoResize"
         Title="Binary-Hexadecimal-Decimal-Converter">
     <Window.DataContext>
         <local:MainViewModel />
