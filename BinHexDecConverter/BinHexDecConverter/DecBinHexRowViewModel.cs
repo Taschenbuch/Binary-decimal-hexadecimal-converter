@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using BinHexDecConverter.Bin2Hex2DecConverters;
+using BinHexDecConverter.NumberConverters;
 using PropertyChanged;
 
 namespace BinHexDecConverter

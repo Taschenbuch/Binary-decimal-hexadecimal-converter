@@ -1,4 +1,4 @@
-﻿namespace BinHexDecConverter.Bin2Hex2DecConverters
+﻿namespace BinHexDecConverter.NumberConverters
 {
     public class SeparatorService
     {

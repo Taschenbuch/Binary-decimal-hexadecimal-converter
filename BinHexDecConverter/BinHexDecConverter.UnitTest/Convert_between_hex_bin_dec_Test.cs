@@ -1,5 +1,5 @@
 using System;
-using BinHexDecConverter.Bin2Hex2DecConverters;
+using BinHexDecConverter.NumberConverters;
 using FluentAssertions;
 using NUnit.Framework;
 

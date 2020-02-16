@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BinHexDecConverter"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:attachedBehaviors="clr-namespace:BinHexDecConverter.AttachedBehaviors"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -24,7 +25,7 @@
             <Setter Property="Padding" Value="10 0"/>
         </Style>
         <Style x:Key="EditCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
-            <Setter Property="local:DataGridTextBoxSingleClickEditBehavior.Enable" Value="True" />
+            <Setter Property="attachedBehaviors:DataGridTextBoxSingleClickEditBehavior.Enable" Value="True" />
             <Setter Property="TextBlock.TextAlignment" Value="Right"/>
             <Setter Property="ToolTip" Value="click to enter number"/>
             <Setter Property="Padding" Value="10 0"/>

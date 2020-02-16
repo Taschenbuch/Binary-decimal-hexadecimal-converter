@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace BinHexDecConverter
+namespace BinHexDecConverter.AttachedBehaviors
 {
     // Sources:
     // http://wpf-tutorial-net.blogspot.com/2016/05/wpf-datagrid-edit-cell-on-single-click.html
