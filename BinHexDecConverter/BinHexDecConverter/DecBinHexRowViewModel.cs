@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using BinHexDecConverter.Annotations;
 using BinHexDecConverter.Bin2Hex2DecConverters;
+using PropertyChanged;
 
 namespace BinHexDecConverter
 {
@@ -14,6 +13,7 @@ namespace BinHexDecConverter
 
         private string _dec;
 
+        [AlsoNotifyFor(nameof(Binary), nameof(Hexadecimal))]
         public string Dec
         {
             get => _dec;
@@ -23,6 +23,7 @@ namespace BinHexDecConverter
 
         private string _binary;
 
+        [AlsoNotifyFor(nameof(Dec), nameof(Hexadecimal))]
         public string Binary
         {
             get => _binary;
@@ -32,12 +33,12 @@ namespace BinHexDecConverter
 
         private string _hexadecimal;
 
+        [AlsoNotifyFor(nameof(Binary), nameof(Dec))]
         public string Hexadecimal
         {
             get => _hexadecimal;
             set => TryConvertToAndSetDecimalAndBinary(value);
         }
-
 
         private void TryConvertToAndSetDecimalAndHexadecimal(string value)
         {
@@ -49,12 +50,10 @@ namespace BinHexDecConverter
             }
             catch (Exception)
             {
-                _dec = "";
-                _hexadecimal = "";
+                _dec = string.Empty;
+                _hexadecimal = string.Empty;
                 throw;
             }
-            OnPropertyChanged(nameof(Dec));
-            OnPropertyChanged(nameof(Hexadecimal));
         }
 
 
@@ -62,18 +61,16 @@ namespace BinHexDecConverter
         {
             try
             {
-                _dec = value;
-                _binary = DecimalToBinaryService.DecimalToBinary(_dec);
+                _dec         = value;
+                _binary      = DecimalToBinaryService.DecimalToBinary(_dec);
                 _hexadecimal = DecimalToHexadecimalService.DecimalToHexadecimal(_dec);
             }
             catch (Exception)
             {
-                _binary = "";
-                _hexadecimal = "";
+                _binary      = string.Empty;
+                _hexadecimal = string.Empty;
                 throw;
             }
-            OnPropertyChanged(nameof(Binary));
-            OnPropertyChanged(nameof(Hexadecimal));
         }
 
 
@@ -87,21 +84,12 @@ namespace BinHexDecConverter
             }
             catch (Exception)
             {
-                _dec = "";
-                _binary = "";
+                _dec = string.Empty;
+                _binary = string.Empty;
                 throw;
             }
-
-            OnPropertyChanged(nameof(Dec));
-            OnPropertyChanged(nameof(Binary));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
