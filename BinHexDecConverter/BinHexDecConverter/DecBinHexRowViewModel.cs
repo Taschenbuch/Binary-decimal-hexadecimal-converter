@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using BinHexDecConverter.Annotations;
 using BinHexDecConverter.Bin2Hex2DecConverters;
 
 namespace BinHexDecConverter
 {
     public class DecBinHexRowViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
 
         public string Comment { get; set; }
@@ -43,15 +44,17 @@ namespace BinHexDecConverter
             try
             {
                 _binary = value;
-                Dec = BinaryToDecimalService.BinaryToDecimal(_binary);
-                Hexadecimal = DecimalToHexadecimalService.DecimalToHexadecimal(_dec);
+                _dec = BinaryToDecimalService.BinaryToDecimal(_binary);
+                _hexadecimal = DecimalToHexadecimalService.DecimalToHexadecimal(_dec);
             }
             catch (Exception)
             {
-                Dec = "";
-                Hexadecimal = "";
+                _dec = "";
+                _hexadecimal = "";
                 throw;
             }
+            OnPropertyChanged(nameof(Dec));
+            OnPropertyChanged(nameof(Hexadecimal));
         }
 
 
@@ -60,15 +63,17 @@ namespace BinHexDecConverter
             try
             {
                 _dec = value;
-                Binary = DecimalToBinaryService.DecimalToBinary(_dec);
-                Hexadecimal = DecimalToHexadecimalService.DecimalToHexadecimal(_dec);
+                _binary = DecimalToBinaryService.DecimalToBinary(_dec);
+                _hexadecimal = DecimalToHexadecimalService.DecimalToHexadecimal(_dec);
             }
             catch (Exception)
             {
-                Binary = "";
-                Hexadecimal = "";
+                _binary = "";
+                _hexadecimal = "";
                 throw;
             }
+            OnPropertyChanged(nameof(Binary));
+            OnPropertyChanged(nameof(Hexadecimal));
         }
 
 
@@ -77,15 +82,26 @@ namespace BinHexDecConverter
             try
             {
                 _hexadecimal = value;
-                Dec = HexadecimalToDecimalService.HexadecimalToDecimal(_hexadecimal);
-                Binary = DecimalToBinaryService.DecimalToBinary(_dec);
+                _dec = HexadecimalToDecimalService.HexadecimalToDecimal(_hexadecimal);
+                _binary= DecimalToBinaryService.DecimalToBinary(_dec);
             }
             catch (Exception)
             {
-                Dec = "";
-                Binary = "";
+                _dec = "";
+                _binary = "";
                 throw;
             }
+
+            OnPropertyChanged(nameof(Dec));
+            OnPropertyChanged(nameof(Binary));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
