@@ -36,6 +36,20 @@ namespace BinHexDecConverter
             set => TryConvertToAndSetDecimalAndBinary(value);
         }
 
+
+        public void UpdateNumberFormat()
+        {
+            _binary      = SeparatorService.RemoveAndAddSeparatorBlanks(_binary, 4);
+            _dec         = SeparatorService.RemoveAndAddSeparatorBlanks(_dec, 3);
+            _hexadecimal = SeparatorService.RemoveAndAddSeparatorBlanks(_hexadecimal, 2);
+            _hexadecimal = _hexadecimal.ToUpper();
+
+            OnPropertyChanged(nameof(Binary));
+            OnPropertyChanged(nameof(Hexadecimal));
+            OnPropertyChanged(nameof(Dec));
+        }
+
+
         #region Private methods
 
         private void TryConvertToAndSetDecimalAndHexadecimal(string value)
@@ -97,17 +111,6 @@ namespace BinHexDecConverter
         private string _hexadecimal;
 
         #endregion
-
-        public void UpdateNumberFormat()
-        {
-            _binary      = SeparatorService.RemoveAndAddSeparatorBlanks(_binary, 4);
-            _dec         = SeparatorService.RemoveAndAddSeparatorBlanks(_dec, 3);
-            _hexadecimal = SeparatorService.RemoveAndAddSeparatorBlanks(_hexadecimal, 2);
-
-            OnPropertyChanged(nameof(Binary));
-            OnPropertyChanged(nameof(Hexadecimal));
-            OnPropertyChanged(nameof(Dec));
-        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
