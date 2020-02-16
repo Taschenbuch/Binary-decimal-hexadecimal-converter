@@ -11,7 +11,7 @@ namespace BinHexDecConverter.NumberConverters
             if (regex.IsMatch(text))
             {
                 var invalidCharactersString = GetStringWithInvalidCharacters(text, regex);
-                var exceptionMessage        = $"{exceptionMessagePrefix} {invalidCharactersString}";
+                var exceptionMessage        = $"{exceptionMessagePrefix} {invalidCharactersString}{WHITESPACE_FOR_BETTER_READABILITY_OF_POPUP}";
                 throw new ArgumentOutOfRangeException(PREVENT_PARAMETER_NAME_IN_EXCEPTION_MESSAGE, exceptionMessage);
             }
         }
@@ -26,5 +26,6 @@ namespace BinHexDecConverter.NumberConverters
         }
 
         private const string PREVENT_PARAMETER_NAME_IN_EXCEPTION_MESSAGE = "";
+        private const string WHITESPACE_FOR_BETTER_READABILITY_OF_POPUP = "  ";
     }
 }
