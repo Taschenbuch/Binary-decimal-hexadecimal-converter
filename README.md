@@ -7,12 +7,12 @@
 ![grafik](https://user-images.githubusercontent.com/43114787/74632920-c8745980-5160-11ea-92e8-bdabe7bec5b9.png)
 
 
-#### Add rows with the +-Sign and delete rows with the x-Sign
+#### Add rows with the "+" button and delete rows with the "x" button
 
 ![grafik](https://user-images.githubusercontent.com/43114787/74632994-efcb2680-5160-11ea-95ca-383ea5fcffb5.png)
 
 
-#### Shows a Hint when you enter a number with the wrong format.
+#### Shows a hint when you enter invalid characters.
 
 ![grafik](https://user-images.githubusercontent.com/43114787/74632776-703d5780-5160-11ea-8860-413213f44448.png)
 
