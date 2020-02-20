@@ -22,18 +22,8 @@
         <local:MainViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
-            <Setter Property="materialDesign:ValidationAssist.UsePopup" Value="True" />
-            <Setter Property="Padding" Value="10 0"/>
-        </Style>
-        <Style x:Key="EditCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
-            <Setter Property="attachedBehaviors:DataGridTextBoxSingleClickEditBehavior.Enable" Value="True" />
-            <Setter Property="TextBlock.TextAlignment" Value="Right"/>
-            <Setter Property="ToolTip" Value="click to enter number"/>
-            <Setter Property="Padding" Value="10 0"/>
-        </Style>
         <Style x:Key="CellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
-            <Setter Property="Padding" Value="10 0"/>
+            <Setter Property="Padding" Value="5 0"/>
         </Style>
         <Style x:Key="HeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
             <Setter Property="Padding" Value="10 2"/>
@@ -77,7 +67,8 @@
                         <DataTemplate>
                             <TextBox Text="{Binding Dec, UpdateSourceTrigger=PropertyChanged}" 
                                      HorizontalContentAlignment="Right" 
-                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"/>
+                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
+                                     materialDesign:ValidationAssist.UsePopup="True"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -86,7 +77,8 @@
                         <DataTemplate>
                             <TextBox Text="{Binding Binary, UpdateSourceTrigger=PropertyChanged}" 
                                      HorizontalContentAlignment="Right" 
-                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"/>
+                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
+                                     materialDesign:ValidationAssist.UsePopup="True"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -95,7 +87,8 @@
                         <DataTemplate>
                             <TextBox Text="{Binding Hexadecimal, UpdateSourceTrigger=PropertyChanged}"  
                                      HorizontalContentAlignment="Right" 
-                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"/>
+                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
+                                     materialDesign:ValidationAssist.UsePopup="True"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
