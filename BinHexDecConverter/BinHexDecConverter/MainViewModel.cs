@@ -10,13 +10,6 @@ namespace BinHexDecConverter
         {
             DeleteRowCommand          = new RelayCommand(DeleteRow);
             AddEmptyRowCommand        = new RelayCommand(AddEmptyRow);
-            UpdateNumberFormatCommand = new RelayCommand(UpdateNumberFormat);
-        }
-
-        private void UpdateNumberFormat()
-        {
-            foreach (var decBinHexValue in DecBinHexValues)
-                decBinHexValue.UpdateNumberFormat();
         }
 
 
@@ -32,7 +25,6 @@ namespace BinHexDecConverter
         }
 
 
-        public ICommand UpdateNumberFormatCommand { get; set; }
         public ICommand DeleteRowCommand          { get; set; }
         public ICommand AddEmptyRowCommand        { get; set; }
 

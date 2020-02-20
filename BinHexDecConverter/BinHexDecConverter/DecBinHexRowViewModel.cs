@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using BinHexDecConverter.Annotations;
 using BinHexDecConverter.NumberConverters;
 using PropertyChanged;
@@ -9,6 +10,14 @@ namespace BinHexDecConverter
 {
     public class DecBinHexRowViewModel : INotifyPropertyChanged
     {
+        public DecBinHexRowViewModel()
+        {
+            UpdateNumberFormatCommand = new RelayCommand(UpdateNumberFormat);
+        }
+
+        public ICommand UpdateNumberFormatCommand { get; set; }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         public string                            Comment { get; set; }
 
