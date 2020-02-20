@@ -67,6 +67,7 @@
                         <DataTemplate>
                             <TextBox Text="{Binding Dec, UpdateSourceTrigger=PropertyChanged}" 
                                      HorizontalContentAlignment="Right" 
+                                     MaxWidth="180"
                                      attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
                                      materialDesign:ValidationAssist.UsePopup="True"/>
                         </DataTemplate>
@@ -77,6 +78,7 @@
                         <DataTemplate>
                             <TextBox Text="{Binding Binary, UpdateSourceTrigger=PropertyChanged}" 
                                      HorizontalContentAlignment="Right" 
+                                     MaxWidth="600"
                                      attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
                                      materialDesign:ValidationAssist.UsePopup="True"/>
                         </DataTemplate>
@@ -87,6 +89,7 @@
                         <DataTemplate>
                             <TextBox Text="{Binding Hexadecimal, UpdateSourceTrigger=PropertyChanged}"  
                                      HorizontalContentAlignment="Right" 
+                                     MaxWidth="180"
                                      attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
                                      materialDesign:ValidationAssist.UsePopup="True"/>
                         </DataTemplate>
