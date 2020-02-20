@@ -63,22 +63,46 @@
                 </b:EventTrigger>
             </b:Interaction.Triggers>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Comment" 
-                                    Binding="{Binding Comment}" 
-                                    EditingElementStyle="{StaticResource TextBoxStyle}" 
-                                    CellStyle="{StaticResource EditCellStyle}"/>
-                <DataGridTextColumn Header="Decimal" 
-                                    Binding="{Binding Dec, UpdateSourceTrigger=PropertyChanged}" 
-                                    EditingElementStyle="{StaticResource TextBoxStyle}" 
-                                    CellStyle="{StaticResource EditCellStyle}" />
-                <DataGridTextColumn Header="Binary" 
-                                    Binding="{Binding Binary, UpdateSourceTrigger=PropertyChanged}" 
-                                    EditingElementStyle="{StaticResource TextBoxStyle}" 
-                                    CellStyle="{StaticResource EditCellStyle}" />
-                <DataGridTextColumn Header="Hexadecimal" 
+                <DataGridTemplateColumn Header="Comment" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" 
+                                     HorizontalContentAlignment="Right" 
+                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Decimal" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Dec, UpdateSourceTrigger=PropertyChanged}" 
+                                     HorizontalContentAlignment="Right" 
+                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Binary" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Binary, UpdateSourceTrigger=PropertyChanged}" 
+                                     HorizontalContentAlignment="Right" 
+                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Hexadecimal" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Hexadecimal, UpdateSourceTrigger=PropertyChanged}"  
+                                     HorizontalContentAlignment="Right" 
+                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTextColumn Header="Hexadecimal" 
                                     Binding="{Binding Hexadecimal, UpdateSourceTrigger=PropertyChanged}" 
                                     EditingElementStyle="{StaticResource TextBoxStyle}" 
-                                    CellStyle="{StaticResource EditCellStyle}"/>
+                                    CellStyle="{StaticResource EditCellStyle}"/>-->
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
