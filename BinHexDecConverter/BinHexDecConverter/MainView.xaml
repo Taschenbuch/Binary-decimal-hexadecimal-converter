@@ -48,7 +48,7 @@
                   CellStyle="{StaticResource ReducedHeightCellStyle}"
                   ColumnHeaderStyle="{StaticResource HeaderStyle}">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Comment" >
+                <DataGridTemplateColumn Header="Comment" MinWidth="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" 
@@ -57,12 +57,11 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Decimal" >
+                <DataGridTemplateColumn Header="Decimal" MinWidth="100"  MaxWidth="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Dec, UpdateSourceTrigger=PropertyChanged}" 
                                      HorizontalContentAlignment="Right" 
-                                     MaxWidth="180"
                                      attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
                                      materialDesign:ValidationAssist.UsePopup="True" >
                                 <b:Interaction.Triggers>
@@ -74,12 +73,11 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Binary" >
+                <DataGridTemplateColumn Header="Binary" MinWidth="100" MaxWidth="600">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Binary, UpdateSourceTrigger=PropertyChanged}" 
                                      HorizontalContentAlignment="Right" 
-                                     MaxWidth="600"
                                      attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
                                      materialDesign:ValidationAssist.UsePopup="True">
                                 <b:Interaction.Triggers>
@@ -91,12 +89,11 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Hexadecimal" >
+                <DataGridTemplateColumn Header="Hexadecimal" MinWidth="120" MaxWidth="180">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Hexadecimal, UpdateSourceTrigger=PropertyChanged}"  
                                      HorizontalContentAlignment="Right" 
-                                     MaxWidth="180"
                                      attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
                                      materialDesign:ValidationAssist.UsePopup="True">
                                 <b:Interaction.Triggers>
@@ -108,7 +105,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn MinWidth="70" MaxWidth="70">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <Button Height="20" Width="20"
