@@ -15,7 +15,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        SizeToContent="WidthAndHeight"  Height="Auto" Width="Auto"
+        SizeToContent="WidthAndHeight" Height="Auto" Width="Auto"
         ResizeMode="NoResize"
         Title="Binary-Hexadecimal-Decimal-Converter">
     <Window.DataContext>
@@ -23,20 +23,24 @@
     </Window.DataContext>
     <Window.Resources>
         <Style x:Key="ReducedHeightCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
-            <Setter Property="Padding" Value="5 0"/>
+            <Setter Property="Padding" Value="5 0" />
         </Style>
         <Style x:Key="HeaderStyle" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-            <Setter Property="Padding" Value="10 2"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10 2" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
-        <Style x:Key="BitPositonStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignOverlineTextBlock}">
-            <Setter Property="Padding" Value="5 0"/>
+        <Style x:Key="BitPositionStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignOverlineTextBlock}">
+            <Setter Property="Margin" Value="10 0" />
+        </Style>
+        <Style x:Key="NibbleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignBody1TextBlock}">
+            <Setter Property="Margin" Value="10 0 0 10" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!-- CanUserAddRows false, because it doesnt work well we delete row feature: 
         - deletes other row, when delete is clicked on last empty row
@@ -44,29 +48,34 @@
         -->
         <DataGrid x:Name="MyDataGrid"
                   ItemsSource="{Binding DecBinHexValues}"
-                  SelectedItem="{Binding SelectedDecBinHexRowValue}"
+                  SelectedItem="{Binding SelectedDecBinHexRowValue, Mode=TwoWay}"
                   VirtualizingPanel.ScrollUnit="Pixel"
                   AutoGenerateColumns="False"
-                  CanUserAddRows="False"  
+                  CanUserAddRows="False"
                   CellStyle="{StaticResource ReducedHeightCellStyle}"
                   ColumnHeaderStyle="{StaticResource HeaderStyle}">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="SelectionChanged">
+                    <b:InvokeCommandAction Command="{Binding SetNibblesInBitPositionSectionCommand}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Comment" MinWidth="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" 
-                                     HorizontalContentAlignment="Right" 
-                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"/>
+                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Right"
+                                     attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Decimal" MinWidth="100"  MaxWidth="200">
+                <DataGridTemplateColumn Header="Decimal" MinWidth="100" MaxWidth="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Dec, UpdateSourceTrigger=PropertyChanged}" 
-                                     HorizontalContentAlignment="Right" 
+                            <TextBox Text="{Binding Dec, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Right"
                                      attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
-                                     materialDesign:ValidationAssist.UsePopup="True" >
+                                     materialDesign:ValidationAssist.UsePopup="True">
                                 <b:Interaction.Triggers>
                                     <b:EventTrigger EventName="LostFocus">
                                         <b:InvokeCommandAction Command="{Binding UpdateNumberFormatCommand}" />
@@ -79,8 +88,8 @@
                 <DataGridTemplateColumn Header="Binary" MinWidth="100" MaxWidth="600">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Binary, UpdateSourceTrigger=PropertyChanged}" 
-                                     HorizontalContentAlignment="Right" 
+                            <TextBox Text="{Binding Binary, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Right"
                                      attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
                                      materialDesign:ValidationAssist.UsePopup="True">
                                 <b:Interaction.Triggers>
@@ -95,8 +104,8 @@
                 <DataGridTemplateColumn Header="Hexadecimal" MinWidth="120" MaxWidth="180">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Hexadecimal, UpdateSourceTrigger=PropertyChanged}"  
-                                     HorizontalContentAlignment="Right" 
+                            <TextBox Text="{Binding Hexadecimal, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Right"
                                      attachedBehaviors:SelectAllTextBoxTextWhenInFocusBehavior.Enable="True"
                                      materialDesign:ValidationAssist.UsePopup="True">
                                 <b:Interaction.Triggers>
@@ -117,7 +126,7 @@
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     ToolTip="Add Row">
                                 <Button.Content>
-                                    <materialDesign:PackIcon Kind="Add" Height="20" Width="20"/>
+                                    <materialDesign:PackIcon Kind="Add" Height="20" Width="20" />
                                 </Button.Content>
                             </Button>
                         </DataTemplate>
@@ -130,7 +139,7 @@
                                     Style="{StaticResource MaterialDesignFlatAccentButton}"
                                     ToolTip="Delete Row">
                                 <Button.Content>
-                                    <materialDesign:PackIcon Kind="Close" Height="20" Width="20"/>
+                                    <materialDesign:PackIcon Kind="Close" Height="20" Width="20" />
                                 </Button.Content>
                             </Button>
                         </DataTemplate>
@@ -139,78 +148,75 @@
             </DataGrid.Columns>
         </DataGrid>
         <materialDesign:Card Grid.Row="1" Background="{DynamicResource MaterialDesignBackground}">
-            <Expander Header="Bit Positions">
-<Grid>
-    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+            <Expander Header="Bit Positions" IsExpanded="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="63  62  61  60" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Bit63To60}" Style="{StaticResource NibbleStyle}" />
 
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="59  58  57  56" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="59  58  57  56" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Bit59To56}" Style="{StaticResource NibbleStyle}" />
 
-                    <TextBlock Grid.Row="0" Grid.Column="2" Text="55  54  53  52" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="55  54  53  52" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Bit55To52}" Style="{StaticResource NibbleStyle}" />
 
-                    <TextBlock Grid.Row="0" Grid.Column="3" Text="51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="3" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-
-
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                    <TextBlock Grid.Row="3" Grid.Column="2" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-
-                    <TextBlock Grid.Row="2" Grid.Column="3" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                    <TextBlock Grid.Row="3" Grid.Column="3" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-</Grid>
-
-        <!--<StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                <TextBlock Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-                <TextBlock Text="63  62  61  60        59  58  57  56        55  54  53  52        51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-                <TextBlock Text="63  62  61  60        59  58  57  56        55  54  53  52        51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-                <TextBlock Text="63  62  61  60        59  58  57  56        55  54  53  52        51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-                <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-
-            </StackPanel>
-            <TextBlock Text="63  62  61  60        59  58  57  56        55  54  53  52        51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-            <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-
-            <TextBlock Margin="0 10 0 0" 
-                       Text="47  46  45  44        43  42  41  40        39  38  37  36        35  34  33  32" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-            <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-            
-            <TextBlock Margin="0 10 0 0" 
-                       Text="31  30  29  28        27  26  25  24        23  22  21  20        19  18  17  16" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-            <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-
-            <TextBlock Margin="0 10 0 0" 
-                       Text="15  14  13  12        11  10   9     8         7    6     5     4         3    2     1     0" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
-            <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3" Text="51  50  49  48" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Bit51To48}" Style="{StaticResource NibbleStyle}" />
 
 
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="47  46  45  44" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Bit47To44}" Style="{StaticResource NibbleStyle}" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="43  42  41  40" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Bit43To40}" Style="{StaticResource NibbleStyle}" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="39  38  37  36" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Bit39To36}" Style="{StaticResource NibbleStyle}" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="3" Text="35  34  33  32" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding Bit35To32}" Style="{StaticResource NibbleStyle}" />
 
 
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="31  30  29  28" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Bit31To28}" Style="{StaticResource NibbleStyle}" />
 
-        </StackPanel>-->
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="27  26  25  24" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Bit27To24}" Style="{StaticResource NibbleStyle}" />
+
+                    <TextBlock Grid.Row="4" Grid.Column="2" Text="23  22  21  20" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding Bit23To20}" Style="{StaticResource NibbleStyle}" />
+
+                    <TextBlock Grid.Row="4" Grid.Column="3" Text="19  18  17  16" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="5" Grid.Column="3" Text="{Binding Bit19To16}" Style="{StaticResource NibbleStyle}" />
+
+
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="15  14  13  12" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="7" Grid.Column="0" Text="{Binding Bit15To12}" Style="{StaticResource NibbleStyle}" />
+
+                    <TextBlock Grid.Row="6" Grid.Column="1" Text="11  10   9     8" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Bit11To8}" Style="{StaticResource NibbleStyle}" />
+
+                    <TextBlock Grid.Row="6" Grid.Column="2" Text="7     6    5     4" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="7" Grid.Column="2" Text="{Binding Bit7To4}" Style="{StaticResource NibbleStyle}" />
+
+                    <TextBlock Grid.Row="6" Grid.Column="3" Text="3     2    1     0" Style="{StaticResource BitPositionStyle}" />
+                    <TextBlock Grid.Row="7" Grid.Column="3" Text="{Binding Bit3To0}" Style="{StaticResource NibbleStyle}" />
+                </Grid>
             </Expander>
         </materialDesign:Card>
     </Grid>
