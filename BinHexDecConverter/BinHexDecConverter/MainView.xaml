@@ -29,6 +29,9 @@
             <Setter Property="Padding" Value="10 2"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
+        <Style x:Key="BitPositonStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignOverlineTextBlock}">
+            <Setter Property="Padding" Value="5 0"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -135,5 +138,80 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <materialDesign:Card Grid.Row="1" Background="{DynamicResource MaterialDesignBackground}">
+            <Expander Header="Bit Positions">
+<Grid>
+    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="59  58  57  56" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="55  54  53  52" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="3" Text="51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="3" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="3" Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="3" Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+</Grid>
+
+        <!--<StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="63  62  61  60" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                <TextBlock Text="1  0  1  0" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                <TextBlock Text="63  62  61  60        59  58  57  56        55  54  53  52        51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                <TextBlock Text="63  62  61  60        59  58  57  56        55  54  53  52        51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                <TextBlock Text="63  62  61  60        59  58  57  56        55  54  53  52        51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+                <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+            </StackPanel>
+            <TextBlock Text="63  62  61  60        59  58  57  56        55  54  53  52        51  50  49  48" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+            <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+            <TextBlock Margin="0 10 0 0" 
+                       Text="47  46  45  44        43  42  41  40        39  38  37  36        35  34  33  32" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+            <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+            
+            <TextBlock Margin="0 10 0 0" 
+                       Text="31  30  29  28        27  26  25  24        23  22  21  20        19  18  17  16" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+            <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+            <TextBlock Margin="0 10 0 0" 
+                       Text="15  14  13  12        11  10   9     8         7    6     5     4         3    2     1     0" Style="{StaticResource MaterialDesignOverlineTextBlock}"/>
+            <TextBlock Text="1  0  1  0     1  0  0  1     1  0  0  1     1  0  0  1" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+
+
+
+
+
+        </StackPanel>-->
+            </Expander>
+        </materialDesign:Card>
     </Grid>
 </Window>
