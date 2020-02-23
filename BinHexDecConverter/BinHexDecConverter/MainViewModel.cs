@@ -41,22 +41,54 @@ namespace BinHexDecConverter
                                       .Reverse()
                                       .ToList();
 
-            //Bit63To60 = nibbles[15];
-            //Bit59To56 = nibbles[14];
-            //Bit55To52 = nibbles[13];
-            //Bit51To48 = nibbles[12];
-            //Bit47To44 = nibbles[11];
-            //Bit43To40 = nibbles[10];
-            //Bit39To36 = nibbles[9];
-            //Bit35To32 = nibbles[8];
-            //Bit31To28 = nibbles[7];
-            //Bit27To24 = nibbles[6];
-            //Bit23To20 = nibbles[5];
-            //Bit19To16 = nibbles[4];
-            //Bit15To12 = nibbles[3];
-            //Bit11To8  = nibbles[2];
-            //Bit7To4   = nibbles[1];
-            Bit3To0   = nibbles[0];
+
+            if (nibbles.Count >= 16)
+                Bit63To60 = nibbles[15];
+
+            if (nibbles.Count >= 15)
+                Bit59To56 = nibbles[14];
+
+            if (nibbles.Count >= 14)
+                Bit55To52 = nibbles[13];
+
+            if (nibbles.Count >= 13)
+                Bit51To48 = nibbles[12];
+
+            if (nibbles.Count >= 12)
+                Bit47To44 = nibbles[11];
+
+            if (nibbles.Count >= 11)
+                Bit43To40 = nibbles[10];
+
+            if (nibbles.Count >= 10)
+                Bit39To36 = nibbles[9];
+
+            if (nibbles.Count >= 9)
+                Bit35To32 = nibbles[8];
+
+            if (nibbles.Count >= 8)
+                Bit31To28 = nibbles[7];
+
+            if (nibbles.Count >= 7)
+                Bit27To24 = nibbles[6];
+
+            if (nibbles.Count >= 6)
+                Bit23To20 = nibbles[5];
+
+            if (nibbles.Count >= 5)
+                Bit19To16 = nibbles[4];
+
+            if (nibbles.Count >= 4)
+                Bit15To12 = nibbles[3];
+
+            if (nibbles.Count >= 3)
+                Bit11To8 = nibbles[2];
+
+            if (nibbles.Count >= 2)
+                Bit7To4 = nibbles[1];
+
+            if (nibbles.Count >= 1)
+                Bit3To0 = nibbles[0];
         }
 
         public string Bit63To60 { get; set; }
@@ -83,7 +115,7 @@ namespace BinHexDecConverter
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<DecBinHexRowViewModel> DecBinHexValues { get; set; } = 
+        public ObservableCollection<DecBinHexRowViewModel> DecBinHexValues { get; set; } =
             new ObservableCollection<DecBinHexRowViewModel>() {new DecBinHexRowViewModel()};
 
         public DecBinHexRowViewModel SelectedDecBinHexRowValue
@@ -92,7 +124,7 @@ namespace BinHexDecConverter
             set
             {
                 _selectedDecBinHexRowValue = value;
-                
+
                 if (value == null)
                     return;
 
