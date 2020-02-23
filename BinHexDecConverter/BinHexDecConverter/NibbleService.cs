@@ -7,7 +7,7 @@ namespace BinHexDecConverter
 {
     public class NibbleService
     {
-        public static ObservableCollection<string> Create64BitNibbleArray(ObservableCollection<string> nibblesWithBitPosition, IReadOnlyList<string> nibbles)
+        public static ObservableCollection<string> CreateNibbleArray(ObservableCollection<string> nibblesWithBitPosition, IReadOnlyList<string> nibbles)
         {
             for (var nibbleIndex = 0; nibbleIndex <= 15; nibbleIndex++)
                 nibblesWithBitPosition[nibbleIndex] = nibbles.Count > nibbleIndex
