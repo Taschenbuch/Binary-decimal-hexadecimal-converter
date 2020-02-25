@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using BinHexDecConverter.Annotations;
 using BinHexDecConverter.NumberConverters;
+using BinHexDecConverter.Properties;
 using PropertyChanged;
 
 namespace BinHexDecConverter
@@ -19,7 +19,7 @@ namespace BinHexDecConverter
 
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public string                            Comment { get; set; }
+        public string Comment { get; set; }
 
 
         [AlsoNotifyFor(nameof(Binary), nameof(Hexadecimal))]
@@ -48,8 +48,8 @@ namespace BinHexDecConverter
 
         public void UpdateNumberFormat()
         {
-            _binary      = SeparatorService.RemoveAndAddSeparatorBlanks(_binary, 4);
-            _dec         = SeparatorService.RemoveAndAddSeparatorBlanks(_dec, 3);
+            _binary = SeparatorService.RemoveAndAddSeparatorBlanks(_binary, 4);
+            _dec = SeparatorService.RemoveAndAddSeparatorBlanks(_dec, 3);
             _hexadecimal = SeparatorService.RemoveAndAddSeparatorBlanks(_hexadecimal, 2);
             _hexadecimal = _hexadecimal.ToUpper();
 
@@ -71,13 +71,13 @@ namespace BinHexDecConverter
         {
             try
             {
-                _binary      = value;
-                _dec         = BinaryService.BinaryToDecimal(_binary);
+                _binary = value;
+                _dec = BinaryService.BinaryToDecimal(_binary);
                 _hexadecimal = DecimalService.ConvertToHexadecimal(_dec);
             }
             catch (Exception)
             {
-                _dec         = string.Empty;
+                _dec = string.Empty;
                 _hexadecimal = string.Empty;
                 NotifyBinHexDec();
                 throw;
@@ -89,13 +89,13 @@ namespace BinHexDecConverter
         {
             try
             {
-                _dec         = value;
-                _binary      = DecimalService.ConvertToBinary(_dec);
+                _dec = value;
+                _binary = DecimalService.ConvertToBinary(_dec);
                 _hexadecimal = DecimalService.ConvertToHexadecimal(_dec);
             }
             catch (Exception)
             {
-                _binary      = string.Empty;
+                _binary = string.Empty;
                 _hexadecimal = string.Empty;
                 NotifyBinHexDec();
                 throw;
@@ -108,12 +108,12 @@ namespace BinHexDecConverter
             try
             {
                 _hexadecimal = value;
-                _dec         = HexadecimalService.ConvertToDecimal(_hexadecimal);
-                _binary      = DecimalService.ConvertToBinary(_dec);
+                _dec = HexadecimalService.ConvertToDecimal(_hexadecimal);
+                _binary = DecimalService.ConvertToBinary(_dec);
             }
             catch (Exception)
             {
-                _dec    = string.Empty;
+                _dec = string.Empty;
                 _binary = string.Empty;
                 NotifyBinHexDec();
                 throw;
