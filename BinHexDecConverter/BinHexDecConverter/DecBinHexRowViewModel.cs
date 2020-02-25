@@ -72,8 +72,8 @@ namespace BinHexDecConverter
             try
             {
                 _binary      = value;
-                _dec         = BinaryToDecimalService.BinaryToDecimal(_binary);
-                _hexadecimal = DecimalToHexadecimalService.DecimalToHexadecimal(_dec);
+                _dec         = BinaryService.BinaryToDecimal(_binary);
+                _hexadecimal = DecimalService.ConvertToHexadecimal(_dec);
             }
             catch (Exception)
             {
@@ -90,8 +90,8 @@ namespace BinHexDecConverter
             try
             {
                 _dec         = value;
-                _binary      = DecimalToBinaryService.DecimalToBinary(_dec);
-                _hexadecimal = DecimalToHexadecimalService.DecimalToHexadecimal(_dec);
+                _binary      = DecimalService.ConvertToBinary(_dec);
+                _hexadecimal = DecimalService.ConvertToHexadecimal(_dec);
             }
             catch (Exception)
             {
@@ -108,8 +108,8 @@ namespace BinHexDecConverter
             try
             {
                 _hexadecimal = value;
-                _dec         = HexadecimalToDecimalService.HexadecimalToDecimal(_hexadecimal);
-                _binary      = DecimalToBinaryService.DecimalToBinary(_dec);
+                _dec         = HexadecimalService.ConvertToDecimal(_hexadecimal);
+                _binary      = DecimalService.ConvertToBinary(_dec);
             }
             catch (Exception)
             {

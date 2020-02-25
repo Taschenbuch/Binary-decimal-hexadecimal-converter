@@ -1,8 +1,8 @@
 ﻿namespace BinHexDecConverter.NumberConverters
 {
-    public class HexadecimalToDecimalService
+    public class HexadecimalService
     {
-        public static string HexadecimalToDecimal(string hexadecimalString)
+        public static string ConvertToDecimal(string hexadecimalString)
         {
             if (hexadecimalString.IsNullOrWhiteSpace())
                 return string.Empty;

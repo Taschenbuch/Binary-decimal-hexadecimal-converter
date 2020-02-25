@@ -22,7 +22,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("1000000", "1111 0100 0010 0100 0000")]
         public void Convert_decimal_to_binary(string decimalString, string expectedBinaryString)
         {
-            var result = DecimalToBinaryService.DecimalToBinary(decimalString);
+            var result = DecimalService.DecimalService(decimalString);
 
             result.Should().Be(expectedBinaryString);
         }
@@ -36,7 +36,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("a?+", "a?+")]
         public void Throw_if_not_decimal_input_for_binary(string decimalString, string expectedNotAllowedCharacters)
         {
-            Action act = () => DecimalToBinaryService.DecimalToBinary(decimalString);
+            Action act = () => DecimalService.DecimalService(decimalString);
 
             act.Should()
                .Throw<ArgumentOutOfRangeException>()
@@ -60,7 +60,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("11110100001001000000", "1 000 000")]
         public void Converter_binary_to_decimal(string binaryString, string expectedDecimalString)
         {
-            var result = BinaryToDecimalService.BinaryToDecimal(binaryString);
+            var result = BinaryService.BinaryToDecimal(binaryString);
 
             result.Should().Be(expectedDecimalString);
         }
@@ -73,7 +73,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("a=!", "a=!")]
         public void Throw_if_not_binary_input(string binaryString, string expectedNotAllowedCharacters)
         {
-            Action act = () => BinaryToDecimalService.BinaryToDecimal(binaryString);
+            Action act = () => BinaryService.BinaryToDecimal(binaryString);
 
             act.Should()
                .Throw<ArgumentOutOfRangeException>()
@@ -98,7 +98,7 @@ namespace BinHexDecConverter.UnitTest
 
         public void Converter_decimal_to_hexadecimal(string decimalString, string expectedHexadecimalString)
         {
-            var result = DecimalToHexadecimalService.DecimalToHexadecimal(decimalString);
+            var result = DecimalService.ConvertToHexadecimal(decimalString);
 
             result.Should().Be(expectedHexadecimalString);
         }
@@ -113,7 +113,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("  - 1 a 0 0 -", "a-")]
         public void Throw_if_not_decimal_input_for_hexadecimal(string decimalString, string expectedNotAllowedCharacters)
         {
-            Action act = () => DecimalToHexadecimalService.DecimalToHexadecimal(decimalString);
+            Action act = () => DecimalService.ConvertToHexadecimal(decimalString);
 
             act.Should()
                .Throw<ArgumentOutOfRangeException>()
@@ -133,7 +133,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("FFFFF", "1 048 575")]
         public void Converter_hexadecimal_to_decimal(string hexadecimalString, string expectedDecimalString)
         {
-            var result = HexadecimalToDecimalService.HexadecimalToDecimal(hexadecimalString);
+            var result = HexadecimalService.ConvertToDecimal(hexadecimalString);
 
             result.Should().Be(expectedDecimalString);
         }
@@ -148,7 +148,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("zu?=", "zu?=")]
         public void Throw_if_not_hexadecimal(string hexadecimalString, string expectedNotAllowedCharacters)
         {
-            Action act = () => HexadecimalToDecimalService.HexadecimalToDecimal(hexadecimalString);
+            Action act = () => HexadecimalService.ConvertToDecimal(hexadecimalString);
 
             act.Should()
                .Throw<ArgumentOutOfRangeException>()
