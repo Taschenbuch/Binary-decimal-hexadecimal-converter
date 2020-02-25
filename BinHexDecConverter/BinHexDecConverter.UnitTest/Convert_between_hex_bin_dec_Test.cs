@@ -22,7 +22,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("1000000", "1111 0100 0010 0100 0000")]
         public void Convert_decimal_to_binary(string decimalString, string expectedBinaryString)
         {
-            var result = DecimalService.DecimalService(decimalString);
+            var result = DecimalService.ConvertToBinary(decimalString);
 
             result.Should().Be(expectedBinaryString);
         }
@@ -36,7 +36,7 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("a?+", "a?+")]
         public void Throw_if_not_decimal_input_for_binary(string decimalString, string expectedNotAllowedCharacters)
         {
-            Action act = () => DecimalService.DecimalService(decimalString);
+            Action act = () => DecimalService.ConvertToBinary(decimalString);
 
             act.Should()
                .Throw<ArgumentOutOfRangeException>()
