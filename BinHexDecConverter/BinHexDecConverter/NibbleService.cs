@@ -12,6 +12,9 @@ namespace BinHexDecConverter
             if (binaryString.IsNullOrWhiteSpace())
                 return ClearNibbles(nibblesWithBitPosition);
 
+            if(InvalidCharacterRegexFor.Binary.IsMatch(binaryString))
+                return ClearNibbles(nibblesWithBitPosition);
+
             var nibbles = SplitIntoNibbles(binaryString);
             nibbles = AdjustBitSpacing(nibbles);
 

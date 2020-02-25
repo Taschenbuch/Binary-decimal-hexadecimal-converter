@@ -8,6 +8,16 @@ namespace BinHexDecConverter.UnitTest
     public class Format_BitPosition_Nibbles_Test
     {
         [TestCase(
+            "a",
+            new[]
+            {
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "", "",
+                "", "", "", ""
+            }
+        )]
+        [TestCase(
             "",
             new[]
             {
