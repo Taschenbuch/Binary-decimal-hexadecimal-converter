@@ -16,11 +16,12 @@
             return AddSeparatorBlanks(text, distanceBetweenSeparators);
         }
 
+
         public static string RemoveSeparatorBlanks(string text)
         {
             return text.Replace(BLANK_AS_SEPARATOR, string.Empty);
         }
-
+        
 
         public static string AddSeparatorBlanks(string text, int distanceBetweenSeparators)
         {

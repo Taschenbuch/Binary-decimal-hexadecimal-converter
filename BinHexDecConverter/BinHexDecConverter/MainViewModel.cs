@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using BinHexDecConverter.NumberConverters;
 
@@ -30,15 +31,10 @@ namespace BinHexDecConverter
 
         private void SetNibblesInBitPositionSection()
         {
-            var binaryString = SelectedDecBinHexRowValue.Binary;
-            if (binaryString.IsNullOrWhiteSpace())
-                return;
-
-            binaryString = SeparatorService.RemoveSeparatorBlanks(binaryString);
-            binaryString = SeparatorService.AddSeparatorBlanks(binaryString, 4);
-            var nibbles = NibbleService.SplitIntoNibbles(binaryString);
-            NibblesWithBitPosition = NibbleService.CreateNibbleArray(NibblesWithBitPosition, nibbles);
+            NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(SelectedDecBinHexRowValue.Binary, NibblesWithBitPosition);
         }
+
+        
 
 
         public ICommand DeleteRowCommand                      { get; set; }
@@ -47,7 +43,7 @@ namespace BinHexDecConverter
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<string> NibblesWithBitPosition { get; set; } = new ObservableCollection<string>(new string[16]);
+        public ObservableCollection<string> NibblesWithBitPosition { get; set; } = new ObservableCollection<string>(Enumerable.Repeat(string.Empty, 15));
 
         public ObservableCollection<DecBinHexRowViewModel> DecBinHexValues { get; set; } =
             new ObservableCollection<DecBinHexRowViewModel>() {new DecBinHexRowViewModel()};

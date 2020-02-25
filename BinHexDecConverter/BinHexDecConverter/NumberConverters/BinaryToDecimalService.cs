@@ -18,8 +18,5 @@ namespace BinHexDecConverter.NumberConverters
 
             return SeparatorService.AddSeparatorBlanks(decimalString, SeparatorService.DECIMAL_THOUSAND_GROUP_SIZE);
         }
-
-
-    
     }
 }
