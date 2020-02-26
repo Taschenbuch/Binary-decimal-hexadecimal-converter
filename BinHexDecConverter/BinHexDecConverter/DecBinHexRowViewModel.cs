@@ -29,7 +29,7 @@ namespace BinHexDecConverter
         public string Dec
         {
             get => _dec;
-            set => TrySetAndConvertToBinaryAndHexadecimal(value);
+            set => TryConvertToHexadecimalAndBinaryAndSetColumnsAndBitPositionView(value);
         }
 
 
@@ -37,7 +37,7 @@ namespace BinHexDecConverter
         public string Binary
         {
             get => _binary;
-            set => TrySetAndConvertToDecimalAndHexadecimal(value);
+            set => TryConvertToDecimalAndHexadecimalAndSetColumnsAndBitPositionView(value);
         }
 
 
@@ -45,7 +45,7 @@ namespace BinHexDecConverter
         public string Hexadecimal
         {
             get => _hexadecimal;
-            set => TrySetAndConvertToDecimalAndBinary(value);
+            set => TryConvertToDecimalAndBinaryAndSetColumnsAndBitPositionView(value);
         }
 
 
@@ -70,7 +70,7 @@ namespace BinHexDecConverter
 
         #region Private methods
 
-        private void TrySetAndConvertToDecimalAndHexadecimal(string value)
+        private void TryConvertToDecimalAndHexadecimalAndSetColumnsAndBitPositionView(string value)
         {
             try
             {
@@ -85,14 +85,14 @@ namespace BinHexDecConverter
                 _dec = string.Empty;
                 _hexadecimal = string.Empty;
 
-                _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
+                _mainViewModel.NibblesWithBitPosition = NibbleService.ClearNibbles(_mainViewModel.NibblesWithBitPosition);
                 NotifyBinHexDec();
                 throw;
             }
         }
 
 
-        private void TrySetAndConvertToBinaryAndHexadecimal(string value)
+        private void TryConvertToHexadecimalAndBinaryAndSetColumnsAndBitPositionView(string value)
         {
             try
             {
@@ -107,14 +107,14 @@ namespace BinHexDecConverter
                 _binary = string.Empty;
                 _hexadecimal = string.Empty;
 
-                _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
+                _mainViewModel.NibblesWithBitPosition = NibbleService.ClearNibbles(_mainViewModel.NibblesWithBitPosition);
                 NotifyBinHexDec();
                 throw;
             }
         }
 
 
-        private void TrySetAndConvertToDecimalAndBinary(string value)
+        private void TryConvertToDecimalAndBinaryAndSetColumnsAndBitPositionView(string value)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace BinHexDecConverter
                 _dec = string.Empty;
                 _binary = string.Empty;
 
-                _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
+                _mainViewModel.NibblesWithBitPosition = NibbleService.ClearNibbles(_mainViewModel.NibblesWithBitPosition);
                 NotifyBinHexDec();
                 throw;
             }
