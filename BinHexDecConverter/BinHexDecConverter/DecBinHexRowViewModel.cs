@@ -77,7 +77,7 @@ namespace BinHexDecConverter
                 _binary = value;
                 _dec = BinaryService.BinaryToDecimal(_binary);
                 _hexadecimal = DecimalService.ConvertToHexadecimal(_dec);
-                
+
                 _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
             }
             catch (Exception)
@@ -128,7 +128,7 @@ namespace BinHexDecConverter
             {
                 _dec = string.Empty;
                 _binary = string.Empty;
-             
+
                 _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
                 NotifyBinHexDec();
                 throw;

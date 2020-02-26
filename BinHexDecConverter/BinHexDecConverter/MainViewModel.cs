@@ -11,10 +11,10 @@ namespace BinHexDecConverter
 
         public MainViewModel()
         {
-            DeleteRowCommand                      = new RelayCommand(DeleteRow);
-            AddEmptyRowCommand                    = new RelayCommand(AddEmptyRow);
+            DeleteRowCommand = new RelayCommand(DeleteRow);
+            AddEmptyRowCommand = new RelayCommand(AddEmptyRow);
 
-            DecBinHexValues = new ObservableCollection<DecBinHexRowViewModel>() { new DecBinHexRowViewModel(this) };
+            DecBinHexValues = new ObservableCollection<DecBinHexRowViewModel>() {new DecBinHexRowViewModel(this)};
         }
 
 
@@ -30,15 +30,15 @@ namespace BinHexDecConverter
         }
 
 
-        public ICommand DeleteRowCommand                      { get; set; }
-        public ICommand AddEmptyRowCommand                    { get; set; }
+        public ICommand DeleteRowCommand { get; set; }
+        public ICommand AddEmptyRowCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<string> NibblesWithBitPosition { get; set; } = new ObservableCollection<string>(Enumerable.Repeat(string.Empty, 16));
 
         public ObservableCollection<DecBinHexRowViewModel> DecBinHexValues { get; set; }
-            
+
 
         public DecBinHexRowViewModel SelectedDecBinHexRowValue
         {
