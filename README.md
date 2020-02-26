@@ -6,7 +6,7 @@
 #### Add rows with the "+" button and delete rows with the "x" button
 
 
-![test](https://user-images.githubusercontent.com/43114787/74911037-1a64eb80-53bc-11ea-9221-14303350fd75.gif)
+![4](https://user-images.githubusercontent.com/43114787/75397946-884b6e80-58f8-11ea-9e57-4be08ac999fb.gif)
 
 
 #### Shows a hint when you enter invalid characters.
