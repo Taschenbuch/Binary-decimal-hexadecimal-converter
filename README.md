@@ -15,6 +15,6 @@
 
 ![grafik](https://user-images.githubusercontent.com/43114787/74632776-703d5780-5160-11ea-8860-413213f44448.png)
 
-- portable app. No installer needed.
+- portable app. No installation required. Works by just starting the .exe
 - uses .NET Core 3.1
 - uses [Material Design In XAML Toolkit](https://github.com/ButchersBoy/MaterialDesignInXamlToolkit)
