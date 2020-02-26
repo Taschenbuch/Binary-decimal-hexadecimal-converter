@@ -39,7 +39,7 @@ namespace BinHexDecConverter
         }
 
 
-        private static ObservableCollection<string> ClearNibbles(ObservableCollection<string> nibblesWithBitPosition)
+        public static ObservableCollection<string> ClearNibbles(ObservableCollection<string> nibblesWithBitPosition)
         {
             for (var position = 0; position < nibblesWithBitPosition.Count; position++)
                 nibblesWithBitPosition[position] = string.Empty;

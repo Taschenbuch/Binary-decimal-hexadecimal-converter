@@ -10,8 +10,11 @@ namespace BinHexDecConverter
 {
     public class DecBinHexRowViewModel : INotifyPropertyChanged
     {
-        public DecBinHexRowViewModel()
+        private readonly MainViewModel _mainViewModel;
+
+        public DecBinHexRowViewModel(MainViewModel mainViewModel)
         {
+            _mainViewModel = mainViewModel;
             UpdateNumberFormatCommand = new RelayCommand(UpdateNumberFormat);
         }
 
@@ -74,11 +77,15 @@ namespace BinHexDecConverter
                 _binary = value;
                 _dec = BinaryService.BinaryToDecimal(_binary);
                 _hexadecimal = DecimalService.ConvertToHexadecimal(_dec);
+                
+                _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
             }
             catch (Exception)
             {
                 _dec = string.Empty;
                 _hexadecimal = string.Empty;
+
+                _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
                 NotifyBinHexDec();
                 throw;
             }
@@ -92,11 +99,15 @@ namespace BinHexDecConverter
                 _dec = value;
                 _binary = DecimalService.ConvertToBinary(_dec);
                 _hexadecimal = DecimalService.ConvertToHexadecimal(_dec);
+
+                _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
             }
             catch (Exception)
             {
                 _binary = string.Empty;
                 _hexadecimal = string.Empty;
+
+                _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
                 NotifyBinHexDec();
                 throw;
             }
@@ -110,11 +121,15 @@ namespace BinHexDecConverter
                 _hexadecimal = value;
                 _dec = HexadecimalService.ConvertToDecimal(_hexadecimal);
                 _binary = DecimalService.ConvertToBinary(_dec);
+
+                _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
             }
             catch (Exception)
             {
                 _dec = string.Empty;
                 _binary = string.Empty;
+             
+                _mainViewModel.NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(_binary, _mainViewModel.NibblesWithBitPosition);
                 NotifyBinHexDec();
                 throw;
             }

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-using BinHexDecConverter.NumberConverters;
 
 namespace BinHexDecConverter
 {
@@ -14,39 +13,32 @@ namespace BinHexDecConverter
         {
             DeleteRowCommand                      = new RelayCommand(DeleteRow);
             AddEmptyRowCommand                    = new RelayCommand(AddEmptyRow);
-            SetNibblesInBitPositionSectionCommand = new RelayCommand(SetNibblesInBitPositionSection);
+
+            DecBinHexValues = new ObservableCollection<DecBinHexRowViewModel>() { new DecBinHexRowViewModel(this) };
         }
 
 
         private void AddEmptyRow()
         {
-            DecBinHexValues.Add(new DecBinHexRowViewModel());
+            DecBinHexValues.Add(new DecBinHexRowViewModel(this));
         }
 
         private void DeleteRow()
         {
             RowService.DeleteRow(SelectedDecBinHexRowValue, DecBinHexValues);
-            RowService.AddRowIfNoRowIsLeft(DecBinHexValues);
+            RowService.AddRowIfNoRowIsLeft(DecBinHexValues, this);
         }
-
-        private void SetNibblesInBitPositionSection()
-        {
-            NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(SelectedDecBinHexRowValue.Binary, NibblesWithBitPosition);
-        }
-
-        
 
 
         public ICommand DeleteRowCommand                      { get; set; }
         public ICommand AddEmptyRowCommand                    { get; set; }
-        public ICommand SetNibblesInBitPositionSectionCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<string> NibblesWithBitPosition { get; set; } = new ObservableCollection<string>(Enumerable.Repeat(string.Empty, 15));
+        public ObservableCollection<string> NibblesWithBitPosition { get; set; } = new ObservableCollection<string>(Enumerable.Repeat(string.Empty, 16));
 
-        public ObservableCollection<DecBinHexRowViewModel> DecBinHexValues { get; set; } =
-            new ObservableCollection<DecBinHexRowViewModel>() {new DecBinHexRowViewModel()};
+        public ObservableCollection<DecBinHexRowViewModel> DecBinHexValues { get; set; }
+            
 
         public DecBinHexRowViewModel SelectedDecBinHexRowValue
         {
@@ -55,10 +47,11 @@ namespace BinHexDecConverter
             {
                 _selectedDecBinHexRowValue = value;
 
-                if (value == null)
-                    return;
+                var noRowIsSelectedOrLastRowIsDeleted = value == null;
+                if (noRowIsSelectedOrLastRowIsDeleted)
+                    NibblesWithBitPosition = NibbleService.ClearNibbles(NibblesWithBitPosition);
 
-                SetNibblesInBitPositionSection();
+                NibblesWithBitPosition = NibbleService.UpdateBitPositionNibbles(SelectedDecBinHexRowValue.Binary, NibblesWithBitPosition);
             }
         }
     }

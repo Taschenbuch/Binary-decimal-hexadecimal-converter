@@ -4,10 +4,10 @@ namespace BinHexDecConverter
 {
     public class RowService
     {
-        public static void AddRowIfNoRowIsLeft(ObservableCollection<DecBinHexRowViewModel> decBinHexValues)
+        public static void AddRowIfNoRowIsLeft(ObservableCollection<DecBinHexRowViewModel> decBinHexValues, MainViewModel mainViewModel)
         {
             if (decBinHexValues.IsEmpty())
-                decBinHexValues.Add(new DecBinHexRowViewModel());
+                decBinHexValues.Add(new DecBinHexRowViewModel(mainViewModel));
         }
 
 

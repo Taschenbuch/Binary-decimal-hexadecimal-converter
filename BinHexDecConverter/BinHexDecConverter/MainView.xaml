@@ -54,11 +54,6 @@
                   CanUserAddRows="False"
                   CellStyle="{StaticResource ReducedHeightCellStyle}"
                   ColumnHeaderStyle="{StaticResource HeaderStyle}">
-            <b:Interaction.Triggers>
-                <b:EventTrigger EventName="SelectionChanged">
-                    <b:InvokeCommandAction Command="{Binding SetNibblesInBitPositionSectionCommand}" />
-                </b:EventTrigger>
-            </b:Interaction.Triggers>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Comment" MinWidth="100">
                     <DataGridTemplateColumn.CellTemplate>
