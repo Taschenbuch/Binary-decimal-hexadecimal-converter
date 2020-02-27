@@ -7,6 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:attachedBehaviors="clr-namespace:BinHexDecConverter.AttachedBehaviors"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:converters="clr-namespace:BinHexDecConverter.Converters"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -22,6 +23,7 @@
         <local:MainViewModel />
     </Window.DataContext>
     <Window.Resources>
+        <converters:HighlightTextConverter x:Key="HighlightTextConverter" />
         <Style x:Key="ReducedHeightCellStyle" TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
             <Setter Property="Padding" Value="5 0" />
         </Style>
@@ -205,7 +207,17 @@
                     <TextBlock Grid.Row="6" Grid.Column="2" Text="7     6    5     4" Style="{StaticResource BitPositionStyle}" />
                     <TextBlock Grid.Row="7" Grid.Column="2" Text="{Binding NibblesWithBitPosition[1]}" Style="{StaticResource NibbleStyle}" />
 
-                    <TextBlock Grid.Row="6" Grid.Column="3" Text="3     2    1     0" Style="{StaticResource BitPositionStyle}" />
+                    <!--<ContentControl Grid.Row="6" Grid.Column="3" Content="{Binding Source='3  |~S~| 2  |~E~| 1   0', Converter={StaticResource HighlightTextConverter}}"  />-->
+                    <!--<TextBlock Grid.Row="6" Grid.Column="3" Text="{Binding Source='3   2   1   0', Converter={StaticResource HighlightTextConverter}}" Style="{StaticResource BitPositionStyle}" />-->
+                    <local:HighlightingTextBlock 
+                        x:Name="HighlightingTextBlock"
+                        Grid.Row="6" Grid.Column="3" 
+                        Text="{Binding Source='3   2   1   0'}"
+                        HighlightText="{Binding Source='1'}" 
+                        HighlightBackground="LightPink"
+                        HighlightForeground="Black" 
+                         />
+                    <!--<TextBlock Grid.Row="6" Grid.Column="3" Text="{Binding Source='3   2   1   0', Converter={StaticResource HighlightTextConverter}}" Style="{StaticResource BitPositionStyle}" />-->
                     <TextBlock Grid.Row="7" Grid.Column="3" Text="{Binding NibblesWithBitPosition[0]}" Style="{StaticResource NibbleStyle}" />
                 </Grid>
             </Expander>
