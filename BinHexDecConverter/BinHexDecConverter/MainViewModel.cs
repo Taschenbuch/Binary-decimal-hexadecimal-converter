@@ -39,6 +39,8 @@ namespace BinHexDecConverter
 
         public ObservableCollection<DecBinHexRowViewModel> DecBinHexValues { get; set; }
 
+        public string Test { get; set; } = "1 1 2";
+        public string Highlight { get; set; } = "1";
 
         public DecBinHexRowViewModel SelectedDecBinHexRowValue
         {
