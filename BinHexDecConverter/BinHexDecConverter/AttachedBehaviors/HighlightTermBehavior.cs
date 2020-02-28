@@ -1,0 +1,128 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
+
+namespace BinHexDecConverter.AttachedBehaviors
+{
+    // Sources:
+    // http://wpf-tutorial-net.blogspot.com/2016/05/wpf-datagrid-edit-cell-on-single-click.html
+    // https://stackoverflow.com/a/3426992/4394435
+    // but doesnt work properly for comboBoxes etc.
+
+    public static class HighlightTermBehavior
+    {
+        public static readonly DependencyProperty TextProperty = DependencyProperty.RegisterAttached(
+            "Text",
+            typeof(string),
+            typeof(HighlightTermBehavior),
+            new FrameworkPropertyMetadata("", OnTextChanged));
+
+
+        public static string GetText(FrameworkElement frameworkElement)
+        {
+            return (string) frameworkElement.GetValue(TextProperty);
+        }
+
+
+        public static void SetText(FrameworkElement frameworkElement, string value)
+        {
+            frameworkElement.SetValue(TextProperty, value);
+        }
+
+
+        private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TextBlock textBlock)
+            {
+                var text                = (string) e.NewValue;
+                var termToBeHighlighted = "1";
+                SetTextBoxAndHighlightTerm(textBlock, text, termToBeHighlighted);
+            }
+        }
+
+        private static void SetTextBoxAndHighlightTerm(TextBlock textBlock, string text, string termToBeHighlighted)
+        {
+            textBlock.Text = text;
+
+            if (text.Length == 0)
+                return;
+
+            var foundIndices = text.AllIndicesOf(termToBeHighlighted, false)
+                                   .ToList();
+
+            if (foundIndices.IsEmpty())
+                return;
+
+            textBlock.Text = string.Empty;
+            textBlock.Inlines.Clear();
+
+            var textParts = SplitInToBeAndNotToBeHighlightedTextParts(text, termToBeHighlighted);
+
+            foreach (var part in textParts)
+            {
+                if (part == termToBeHighlighted)
+                    textBlock.Inlines.Add(new Run {Text = part, FontWeight = FontWeights.ExtraBold});
+                else
+                    textBlock.Inlines.Add(new Run {Text = part, FontWeight = FontWeights.Light});
+            }
+        }
+
+
+        public static List<string> SplitInToBeAndNotToBeHighlightedTextParts(string text, string termToBeHighlighted)
+        {
+            if (text.IsNullOrEmpty())
+                return new List<string>() {string.Empty};
+
+            var termToBeHighlightedIndices = text.AllIndicesOf(termToBeHighlighted, false)
+                                                 .ToList();
+
+            var textParts = new List<string>();
+            var nextIndex = 0;
+
+            foreach (var termIndex in termToBeHighlightedIndices)
+            {
+                textParts = AddNotToBeHighlightedTextPart(text, nextIndex, termIndex, textParts);
+                textParts.Add(termToBeHighlighted);
+                nextIndex = termIndex + 1;
+            }
+
+            textParts = AddNotToBeHighlightedTextPartFromTextEnd(text, nextIndex, textParts);
+
+            return textParts;
+        }
+
+        private static List<string> AddNotToBeHighlightedTextPartFromTextEnd(string text, int nextIndex, List<string> textParts)
+        {
+            var notHighlightedTextPart = text.Substring(nextIndex, text.Length - nextIndex);
+            if (TextIsNotEndingWithTerm(notHighlightedTextPart))
+                textParts.Add(notHighlightedTextPart);
+
+            return textParts;
+        }
+
+        private static List<string> AddNotToBeHighlightedTextPart(string text, int nextIndex, int termIndex, List<string> textParts)
+        {
+            if (TermIsAtTextStartOrTermIsRightAfterOtherTerm(nextIndex, termIndex))
+                return textParts;
+
+            var notHighlightedTextPart = text.Substring(nextIndex, termIndex - nextIndex);
+            if (notHighlightedTextPart != string.Empty)
+                textParts.Add(notHighlightedTextPart);
+
+            return textParts;
+        }
+
+        private static bool TextIsNotEndingWithTerm(string notHighlightedTextPart)
+        {
+            return notHighlightedTextPart != string.Empty;
+        }
+
+        private static bool TermIsAtTextStartOrTermIsRightAfterOtherTerm(int nextIndex, int termIndex)
+        {
+            return nextIndex == termIndex;
+        }
+    }
+}
