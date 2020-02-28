@@ -160,55 +160,55 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="63  62  61  60" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="1" Grid.Column="0" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[15]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[15]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="59  58  57  56" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[14]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[14]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="0" Grid.Column="2" Text="55  54  53  52" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="1" Grid.Column="2" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[13]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="1" Grid.Column="2" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[13]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="0" Grid.Column="3" Text="51  50  49  48" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="1" Grid.Column="3" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[12]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="1" Grid.Column="3" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[12]}" Style="{StaticResource NibbleStyle}" />
 
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="47  46  45  44" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="3" Grid.Column="0" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[11]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[11]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="43  42  41  40" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="3" Grid.Column="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[10]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[10]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="2" Grid.Column="2" Text="39  38  37  36" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="3" Grid.Column="2" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[9]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="3" Grid.Column="2" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[9]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="2" Grid.Column="3" Text="35  34  33  32" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="3" Grid.Column="3" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[8]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="3" Grid.Column="3" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[8]}" Style="{StaticResource NibbleStyle}" />
 
 
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="31  30  29  28" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="5" Grid.Column="0" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[7]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="5" Grid.Column="0" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[7]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="4" Grid.Column="1" Text="27  26  25  24" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="5" Grid.Column="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[6]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="5" Grid.Column="1" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[6]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="4" Grid.Column="2" Text="23  22  21  20" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="5" Grid.Column="2" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[5]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="5" Grid.Column="2" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[5]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="4" Grid.Column="3" Text="19  18  17  16" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="5" Grid.Column="3" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[4]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="5" Grid.Column="3" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[4]}" Style="{StaticResource NibbleStyle}" />
 
 
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="15  14  13  12" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="7" Grid.Column="0" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[3]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="7" Grid.Column="0" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[3]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="6" Grid.Column="1" Text="11  10   9     8" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="7" Grid.Column="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[2]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="7" Grid.Column="1" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[2]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="6" Grid.Column="2" Text="7     6    5     4" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="7" Grid.Column="2" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[1]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="7" Grid.Column="2" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[1]}" Style="{StaticResource NibbleStyle}" />
 
                     <TextBlock Grid.Row="6" Grid.Column="3" Text="3     2    1     0" Style="{StaticResource BitPositionStyle}" />
-                    <TextBlock Grid.Row="7" Grid.Column="3" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[0]}" Style="{StaticResource NibbleStyle}" />
+                    <TextBlock Grid.Row="7" Grid.Column="3" attachedBehaviors:HighlightTermBehavior.TermToBeHighlighted="1" attachedBehaviors:HighlightTermBehavior.Text="{Binding NibblesWithBitPosition[0]}" Style="{StaticResource NibbleStyle}" />
                 </Grid>
             </Expander>
         </materialDesign:Card>

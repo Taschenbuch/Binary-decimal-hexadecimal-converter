@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -8,9 +10,7 @@ using System.Windows.Media;
 namespace BinHexDecConverter.AttachedBehaviors
 {
     // Sources:
-    // http://wpf-tutorial-net.blogspot.com/2016/05/wpf-datagrid-edit-cell-on-single-click.html
-    // https://stackoverflow.com/a/3426992/4394435
-    // but doesnt work properly for comboBoxes etc.
+
 
     public static class HighlightTermBehavior
     {
@@ -20,27 +20,24 @@ namespace BinHexDecConverter.AttachedBehaviors
             typeof(HighlightTermBehavior),
             new FrameworkPropertyMetadata("", OnTextChanged));
 
-
-        public static string GetText(FrameworkElement frameworkElement)
-        {
-            return (string) frameworkElement.GetValue(TextProperty);
-        }
+        public static string GetText(FrameworkElement frameworkElement)               => (string) frameworkElement.GetValue(TextProperty);
+        public static void   SetText(FrameworkElement frameworkElement, string value) => frameworkElement.SetValue(TextProperty, value);
 
 
-        public static void SetText(FrameworkElement frameworkElement, string value)
-        {
-            frameworkElement.SetValue(TextProperty, value);
-        }
+        public static readonly DependencyProperty TermToBeHighlightedProperty = DependencyProperty.RegisterAttached(
+            "TermToBeHighlighted",
+            typeof(string),
+            typeof(HighlightTermBehavior),
+            new FrameworkPropertyMetadata("", OnTextChanged));
+
+        public static string GetTermToBeHighlighted(FrameworkElement frameworkElement)               => (string) frameworkElement.GetValue(TermToBeHighlightedProperty);
+        public static void   SetTermToBeHighlighted(FrameworkElement frameworkElement, string value) => frameworkElement.SetValue(TermToBeHighlightedProperty, value);
 
 
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is TextBlock textBlock)
-            {
-                var text                = (string) e.NewValue;
-                var termToBeHighlighted = "1";
-                SetTextBoxAndHighlightTerm(textBlock, text, termToBeHighlighted);
-            }
+                SetTextBoxAndHighlightTerm(textBlock, GetText(textBlock), GetTermToBeHighlighted(textBlock));
         }
 
         private static void SetTextBoxAndHighlightTerm(TextBlock textBlock, string text, string termToBeHighlighted)
