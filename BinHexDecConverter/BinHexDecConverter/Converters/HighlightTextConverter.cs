@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace BinHexDecConverter.Converters
 {
-
+    // todo obsolete
     // source https://stackoverflow.com/a/22026985/4394435
 
     class HighlightTextConverter : IValueConverter

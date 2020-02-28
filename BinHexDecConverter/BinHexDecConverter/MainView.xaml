@@ -212,7 +212,7 @@
                     <local:HighlightingTextBlock 
                         x:Name="HighlightingTextBlock"
                         Grid.Row="7" Grid.Column="3" 
-                        Text="{Binding NibblesWithBitPosition[0]}"
+                        Text="{Binding NibblesWithBitPosition[0], NotifyOnTargetUpdated=True}"
                         Style="{StaticResource NibbleStyle}"/>
                 </Grid>
             </Expander>

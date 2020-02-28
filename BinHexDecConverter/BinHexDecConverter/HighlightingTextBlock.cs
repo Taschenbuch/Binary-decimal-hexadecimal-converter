@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -11,50 +12,44 @@ namespace BinHexDecConverter
     {
         public HighlightingTextBlock()
         {
-            //TargetUpdated += Tb_TargetUpdated;
-
-            var dp = DependencyPropertyDescriptor.FromProperty(
-                TextBlock.TextProperty,
-                typeof(TextBlock));
-            dp.AddValueChanged(HighlightingTextBlock, (sender, args) =>
-            {
-                MessageBox.Show("text changed");
-            });
+            TargetUpdated += Tb_TargetUpdated;
         }
 
 
         private static void Tb_TargetUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
         {
-            var tb = sender as TextBlock;
+            //e.Handled = true;
 
-            if (tb.Text.Length == 0)
+            var textBlock = sender as TextBlock;
+
+            if (textBlock.Text.Length == 0)
                 return;
 
 
+            var textBlockText = textBlock.Text;
+            var textToBeHighlighted = "11";
+            var foundIndices = textBlockText.AllIndicesOf(textToBeHighlighted, false)
+                                            .ToList();
 
-            string textUpper  = tb.Text.ToUpper();
-            String toFind     = "1";
-            int    firstIndex = textUpper.IndexOf(toFind, StringComparison.OrdinalIgnoreCase);
-            String firstStr   = tb.Text.Substring(0, firstIndex);
-            String foundStr   = tb.Text.Substring(firstIndex, toFind.Length);
-            String endStr = tb.Text.Substring(firstIndex + toFind.Length,
-                tb.Text.Length - (firstIndex + toFind.Length));
+            if (foundIndices.IsEmpty())
+                return;
 
-            tb.Inlines.Clear();
-            var run = new Run();
-            run.Text = firstStr;
-            tb.Inlines.Add(run);
-            run            = new Run();
-            run.Background = Brushes.Yellow;
-            run.Text       = foundStr;
-            tb.Inlines.Add(run);
-            run      = new Run();
-            run.Text = endStr;
+            textBlock.Text = string.Empty;
+            textBlock.Inlines.Clear();
 
-            tb.Inlines.Add(run);
+            var notHighlightedTextPart = string.Empty;
+            var startIndex = 0;
 
+            foreach (var foundIndex in foundIndices)
+            {
+                notHighlightedTextPart = textBlock.Text.Substring(startIndex, foundIndex - startIndex);
+                textBlock.Inlines.Add(new Run {Text = notHighlightedTextPart});
+                textBlock.Inlines.Add(new Run {Text = textToBeHighlighted, Background = Brushes.Yellow });
+                startIndex = foundIndex;
+            }
 
-
+            notHighlightedTextPart = textBlock.Text.Substring(startIndex, foundIndices.Last() - startIndex);
+            textBlock.Inlines.Add(new Run { Text = notHighlightedTextPart });
         }
 
 
@@ -81,6 +76,5 @@ namespace BinHexDecConverter
         //run.Text = endStr;
 
         //tb.Inlines.Add(run);
-
     }
 }
