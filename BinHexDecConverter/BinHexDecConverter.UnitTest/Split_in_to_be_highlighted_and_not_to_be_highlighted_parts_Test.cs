@@ -17,10 +17,10 @@ namespace BinHexDecConverter.UnitTest
         [TestCase("00100", new[] { "00", "1", "00" })]
         [TestCase("1", new[] { "1" })]
         [TestCase("1111", new[] { "1", "1", "1", "1" })]
-        //[TestCase("1  1  1  1", new[] { "1", "  ", "1", "  ", "1", "  ", "1" })]
+        [TestCase("1  1  1  1", new[] { "1", "  ", "1", "  ", "1", "  ", "1" })]
         public void Split_in_to_be_highlighted_and_not_to_be_highlighted_parts(string inputText, string [] expectedTextParts)
         {
-            var textParts = HighlightTermBehavior.SeparateTextIntoTermAndNotTermParts(inputText, "1");
+            var textParts = HighlightTermBehavior.SplitTextIntoTermAndNotTermParts(inputText, "1");
 
             textParts.Should().BeEquivalentTo(expectedTextParts);
         }

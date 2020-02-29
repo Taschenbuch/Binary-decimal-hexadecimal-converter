@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Media;
 
 namespace BinHexDecConverter.AttachedBehaviors
 {
@@ -56,7 +54,7 @@ namespace BinHexDecConverter.AttachedBehaviors
             textBlock.Text = string.Empty;
             textBlock.Inlines.Clear();
 
-            var textParts = SeparateTextIntoTermAndNotTermParts(text, termToBeHighlighted);
+            var textParts = SplitTextIntoTermAndNotTermParts(text, termToBeHighlighted);
 
             foreach (var part in textParts)
             {
@@ -68,58 +66,14 @@ namespace BinHexDecConverter.AttachedBehaviors
         }
 
 
-        public static List<string> SeparateTextIntoTermAndNotTermParts(string text, string term)
+        public static List<string> SplitTextIntoTermAndNotTermParts(string text, string term)
         {
             if (text.IsNullOrEmpty())
-                return new List<string>() {string.Empty};
+                return new List<string>() { string.Empty };
 
-            var termPositions = text.AllIndicesOf(term, false)
-                                                 .ToList();
-
-            var textParts = new List<string>();
-            var nextStartPosition = 0;
-
-            foreach (var termPosition in termPositions)
-            {
-                textParts = AddNotTermPart(text, nextStartPosition, termPosition, textParts);
-                textParts.Add(term);
-                nextStartPosition = termPosition + 1;
-            }
-
-            textParts = IfTextEndsWithNotTermPartAddIt(text, nextStartPosition, textParts);
-
-            return textParts;
-        }
-
-        private static List<string> IfTextEndsWithNotTermPartAddIt(string text, int nextIndex, List<string> textParts)
-        {
-            var notHighlightedTextPart = text.Substring(nextIndex, text.Length - nextIndex);
-            if (TextIsNotEndingWithTerm(notHighlightedTextPart))
-                textParts.Add(notHighlightedTextPart);
-
-            return textParts;
-        }
-
-        private static List<string> AddNotTermPart(string text, int nextIndex, int termIndex, List<string> textParts)
-        {
-            if (TermIsAtTextStartOrTermIsRightAfterOtherTerm(nextIndex, termIndex))
-                return textParts;
-
-            var notHighlightedTextPart = text.Substring(nextIndex, termIndex - nextIndex);
-            if (notHighlightedTextPart != string.Empty)
-                textParts.Add(notHighlightedTextPart);
-
-            return textParts;
-        }
-
-        private static bool TextIsNotEndingWithTerm(string notHighlightedTextPart)
-        {
-            return notHighlightedTextPart != string.Empty;
-        }
-
-        private static bool TermIsAtTextStartOrTermIsRightAfterOtherTerm(int nextIndex, int termIndex)
-        {
-            return nextIndex == termIndex;
+            return Regex.Split(text, $@"({Regex.Escape(term)})")
+                                                          .Where(p => p != string.Empty)
+                                                          .ToList();
         }
     }
 }
