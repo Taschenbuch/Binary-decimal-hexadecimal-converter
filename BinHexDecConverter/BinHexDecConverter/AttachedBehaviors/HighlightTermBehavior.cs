@@ -56,7 +56,7 @@ namespace BinHexDecConverter.AttachedBehaviors
             textBlock.Text = string.Empty;
             textBlock.Inlines.Clear();
 
-            var textParts = SplitInToBeAndNotToBeHighlightedTextParts(text, termToBeHighlighted);
+            var textParts = SeparateTextIntoTermAndNotTermParts(text, termToBeHighlighted);
 
             foreach (var part in textParts)
             {
@@ -68,30 +68,30 @@ namespace BinHexDecConverter.AttachedBehaviors
         }
 
 
-        public static List<string> SplitInToBeAndNotToBeHighlightedTextParts(string text, string termToBeHighlighted)
+        public static List<string> SeparateTextIntoTermAndNotTermParts(string text, string term)
         {
             if (text.IsNullOrEmpty())
                 return new List<string>() {string.Empty};
 
-            var termToBeHighlightedIndices = text.AllIndicesOf(termToBeHighlighted, false)
+            var termPositions = text.AllIndicesOf(term, false)
                                                  .ToList();
 
             var textParts = new List<string>();
-            var nextIndex = 0;
+            var nextStartPosition = 0;
 
-            foreach (var termIndex in termToBeHighlightedIndices)
+            foreach (var termPosition in termPositions)
             {
-                textParts = AddNotToBeHighlightedTextPart(text, nextIndex, termIndex, textParts);
-                textParts.Add(termToBeHighlighted);
-                nextIndex = termIndex + 1;
+                textParts = AddNotTermPart(text, nextStartPosition, termPosition, textParts);
+                textParts.Add(term);
+                nextStartPosition = termPosition + 1;
             }
 
-            textParts = AddNotToBeHighlightedTextPartFromTextEnd(text, nextIndex, textParts);
+            textParts = IfTextEndsWithNotTermPartAddIt(text, nextStartPosition, textParts);
 
             return textParts;
         }
 
-        private static List<string> AddNotToBeHighlightedTextPartFromTextEnd(string text, int nextIndex, List<string> textParts)
+        private static List<string> IfTextEndsWithNotTermPartAddIt(string text, int nextIndex, List<string> textParts)
         {
             var notHighlightedTextPart = text.Substring(nextIndex, text.Length - nextIndex);
             if (TextIsNotEndingWithTerm(notHighlightedTextPart))
@@ -100,7 +100,7 @@ namespace BinHexDecConverter.AttachedBehaviors
             return textParts;
         }
 
-        private static List<string> AddNotToBeHighlightedTextPart(string text, int nextIndex, int termIndex, List<string> textParts)
+        private static List<string> AddNotTermPart(string text, int nextIndex, int termIndex, List<string> textParts)
         {
             if (TermIsAtTextStartOrTermIsRightAfterOtherTerm(nextIndex, termIndex))
                 return textParts;
