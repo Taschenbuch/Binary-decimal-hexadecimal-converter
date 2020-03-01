@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -7,9 +8,6 @@ using System.Windows.Documents;
 
 namespace BinHexDecConverter.AttachedBehaviors
 {
-    // Sources:
-
-
     public static class HighlightTermBehavior
     {
         public static readonly DependencyProperty TextProperty = DependencyProperty.RegisterAttached(
@@ -28,52 +26,79 @@ namespace BinHexDecConverter.AttachedBehaviors
             typeof(HighlightTermBehavior),
             new FrameworkPropertyMetadata("", OnTextChanged));
 
-        public static string GetTermToBeHighlighted(FrameworkElement frameworkElement)               => (string) frameworkElement.GetValue(TermToBeHighlightedProperty);
-        public static void   SetTermToBeHighlighted(FrameworkElement frameworkElement, string value) => frameworkElement.SetValue(TermToBeHighlightedProperty, value);
+        public static string GetTermToBeHighlighted(FrameworkElement frameworkElement)
+        {
+            return (string) frameworkElement.GetValue(TermToBeHighlightedProperty);
+        }
+
+        public static void SetTermToBeHighlighted(FrameworkElement frameworkElement, string value)
+        {
+            frameworkElement.SetValue(TermToBeHighlightedProperty, value);
+        }
 
 
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is TextBlock textBlock)
-                SetTextBoxAndHighlightTerm(textBlock, GetText(textBlock), GetTermToBeHighlighted(textBlock));
+                SetTextBoxTextAndHighlightTerm(textBlock, GetText(textBlock), GetTermToBeHighlighted(textBlock));
         }
 
-        private static void SetTextBoxAndHighlightTerm(TextBlock textBlock, string text, string termToBeHighlighted)
+        private static void SetTextBoxTextAndHighlightTerm(TextBlock textBlock, string text, string termToBeHighlighted)
         {
-            textBlock.Text = text;
-
-            if (text.Length == 0)
-                return;
-
-            var foundIndices = text.AllIndicesOf(termToBeHighlighted, false)
-                                   .ToList();
-
-            if (foundIndices.IsEmpty())
-                return;
-
             textBlock.Text = string.Empty;
-            textBlock.Inlines.Clear();
+
+            if (TextIsEmpty(text))
+                return;
+
+            if (TextIsNotContainingTermToBeHighlighted(text, termToBeHighlighted))
+            {
+                AddPartToTextBlock(textBlock, text);
+                return;
+            }
 
             var textParts = SplitTextIntoTermAndNotTermParts(text, termToBeHighlighted);
 
-            foreach (var part in textParts)
-            {
-                if (part == termToBeHighlighted)
-                    textBlock.Inlines.Add(new Run {Text = part, FontWeight = FontWeights.ExtraBold});
-                else
-                    textBlock.Inlines.Add(new Run {Text = part, FontWeight = FontWeights.Light});
-            }
+            foreach (var textPart in textParts)
+                AddPartToTextBlockAndHighlightIfNecessary(textBlock, termToBeHighlighted, textPart);
+        }
+
+        private static bool TextIsEmpty(string text)
+        {
+            return text.Length == 0;
+        }
+
+        private static bool TextIsNotContainingTermToBeHighlighted(string text, string termToBeHighlighted)
+        {
+            return text.Contains(termToBeHighlighted, StringComparison.Ordinal) == false;
+        }
+
+        private static void AddPartToTextBlockAndHighlightIfNecessary(TextBlock textBlock, string termToBeHighlighted, string textPart)
+        {
+            if (textPart == termToBeHighlighted)
+                AddHighlightedPartToTextBlock(textBlock, textPart);
+            else
+                AddPartToTextBlock(textBlock, textPart);
+        }
+
+        private static void AddPartToTextBlock(TextBlock textBlock, string part)
+        {
+            textBlock.Inlines.Add(new Run {Text = part, FontWeight = FontWeights.Light});
+        }
+
+        private static void AddHighlightedPartToTextBlock(TextBlock textBlock, string part)
+        {
+            textBlock.Inlines.Add(new Run {Text = part, FontWeight = FontWeights.ExtraBold});
         }
 
 
         public static List<string> SplitTextIntoTermAndNotTermParts(string text, string term)
         {
             if (text.IsNullOrEmpty())
-                return new List<string>() { string.Empty };
+                return new List<string>() {string.Empty};
 
             return Regex.Split(text, $@"({Regex.Escape(term)})")
-                                                          .Where(p => p != string.Empty)
-                                                          .ToList();
+                        .Where(p => p != string.Empty)
+                        .ToList();
         }
     }
 }
