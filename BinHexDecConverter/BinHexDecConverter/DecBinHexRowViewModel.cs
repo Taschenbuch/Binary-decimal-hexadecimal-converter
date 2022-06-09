@@ -4,11 +4,10 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using BinHexDecConverter.NumberConverters;
 using BinHexDecConverter.Properties;
-using PropertyChanged;
 
 namespace BinHexDecConverter
 {
-    public class DecBinHexRowViewModel : INotifyPropertyChanged
+    public class DecBinHexRowViewModel : PropertyChangedBase
     {
         private readonly MainViewModel _mainViewModel;
 
@@ -19,35 +18,43 @@ namespace BinHexDecConverter
         }
 
         public ICommand UpdateNumberFormatCommand { get; set; }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
         public string Comment { get; set; }
 
-
-        [AlsoNotifyFor(nameof(Binary), nameof(Hexadecimal))]
         public string Dec
         {
             get => _dec;
-            set => TryConvertToHexadecimalAndBinaryAndSetColumnsAndBitPositionView(value);
+            set
+            {
+                TryConvertToHexadecimalAndBinaryAndSetColumnsAndBitPositionView(value);
+                RaisePropertyChanged();
+                RaisePropertyChanged(nameof(Binary));
+                RaisePropertyChanged(nameof(Hexadecimal));
+            }
         }
 
-
-        [AlsoNotifyFor(nameof(Dec), nameof(Hexadecimal))]
         public string Binary
         {
             get => _binary;
-            set => TryConvertToDecimalAndHexadecimalAndSetColumnsAndBitPositionView(value);
+            set
+            {
+                TryConvertToDecimalAndHexadecimalAndSetColumnsAndBitPositionView(value);
+                RaisePropertyChanged();
+                RaisePropertyChanged(nameof(Dec));
+                RaisePropertyChanged(nameof(Hexadecimal));
+            }
         }
 
-
-        [AlsoNotifyFor(nameof(Binary), nameof(Dec))]
         public string Hexadecimal
         {
             get => _hexadecimal;
-            set => TryConvertToDecimalAndBinaryAndSetColumnsAndBitPositionView(value);
+            set
+            {
+                TryConvertToDecimalAndBinaryAndSetColumnsAndBitPositionView(value);
+                RaisePropertyChanged();
+                RaisePropertyChanged(nameof(Binary));
+                RaisePropertyChanged(nameof(Dec));
+            }
         }
-
 
         public void UpdateNumberFormat()
         {
@@ -62,13 +69,10 @@ namespace BinHexDecConverter
         private void NotifyBinHexDec()
         {
             // necessary because when exception was thrown, fody.notifypropertyChange didnt work anymore
-            OnPropertyChanged(nameof(Binary));
-            OnPropertyChanged(nameof(Hexadecimal));
-            OnPropertyChanged(nameof(Dec));
+            RaisePropertyChanged(nameof(Binary));
+            RaisePropertyChanged(nameof(Hexadecimal));
+            RaisePropertyChanged(nameof(Dec));
         }
-
-
-        #region Private methods
 
         private void TryConvertToDecimalAndHexadecimalAndSetColumnsAndBitPositionView(string value)
         {
@@ -91,7 +95,6 @@ namespace BinHexDecConverter
             }
         }
 
-
         private void TryConvertToHexadecimalAndBinaryAndSetColumnsAndBitPositionView(string value)
         {
             try
@@ -112,7 +115,6 @@ namespace BinHexDecConverter
                 throw;
             }
         }
-
 
         private void TryConvertToDecimalAndBinaryAndSetColumnsAndBitPositionView(string value)
         {
@@ -135,20 +137,8 @@ namespace BinHexDecConverter
             }
         }
 
-        #endregion
-
-        #region Fields
-
         private string _dec;
         private string _binary;
         private string _hexadecimal;
-
-        #endregion
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

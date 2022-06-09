@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace BinHexDecConverter
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : PropertyChangedBase
     {
         private DecBinHexRowViewModel _selectedDecBinHexRowValue;
 
@@ -16,7 +16,6 @@ namespace BinHexDecConverter
 
             DecBinHexValues = new ObservableCollection<DecBinHexRowViewModel>() {new DecBinHexRowViewModel(this)};
         }
-
 
         private void AddEmptyRow()
         {
@@ -29,11 +28,9 @@ namespace BinHexDecConverter
             RowService.AddRowIfNoRowIsLeft(DecBinHexValues, this);
         }
 
-
         public ICommand DeleteRowCommand { get; set; }
         public ICommand AddEmptyRowCommand { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<string> NibblesWithBitPosition { get; set; } = new ObservableCollection<string>(Enumerable.Repeat(string.Empty, 16));
 
